@@ -10,16 +10,18 @@ philosophy of testing
 
 Four redesigned branches — same content, different aesthetic:
 
-| Branch | Style | Preview (GitHub) |
+| Branch | Style | 🔗 Live Preview |
 |--------|-------|-----------------|
-| [`ui/retro`](https://github.com/Pawel-Zygler/testofilos/tree/ui/retro) | 🟢 CRT terminal / phosphor-green | [view code](https://github.com/Pawel-Zygler/testofilos/blob/ui/retro/index.html) |
-| [`ui/modern`](https://github.com/Pawel-Zygler/testofilos/tree/ui/modern) | 🟣 Glassmorphism dark / gradient orbs | [view code](https://github.com/Pawel-Zygler/testofilos/blob/ui/modern/index.html) |
-| [`ui/minimalist`](https://github.com/Pawel-Zygler/testofilos/tree/ui/minimalist) | ⬜ Editorial white / zero decoration | [view code](https://github.com/Pawel-Zygler/testofilos/blob/ui/minimalist/index.html) |
-| [`ui/classic`](https://github.com/Pawel-Zygler/testofilos/tree/ui/classic) | 📰 Newspaper / academic serif | [view code](https://github.com/Pawel-Zygler/testofilos/blob/ui/classic/index.html) |
+| [`ui/retro`](https://github.com/Pawel-Zygler/testofilos/tree/ui/retro) | 🟢 CRT terminal / phosphor-green | [preview](https://htmlpreview.github.io/?https://github.com/Pawel-Zygler/testofilos/blob/ui/retro/index.html) |
+| [`ui/modern`](https://github.com/Pawel-Zygler/testofilos/tree/ui/modern) | 🟣 Glassmorphism dark / gradient orbs | [preview](https://htmlpreview.github.io/?https://github.com/Pawel-Zygler/testofilos/blob/ui/modern/index.html) |
+| [`ui/minimalist`](https://github.com/Pawel-Zygler/testofilos/tree/ui/minimalist) | ⬜ Editorial white / zero decoration | [preview](https://htmlpreview.github.io/?https://github.com/Pawel-Zygler/testofilos/blob/ui/minimalist/index.html) |
+| [`ui/classic`](https://github.com/Pawel-Zygler/testofilos/tree/ui/classic) | 📰 Newspaper / academic serif | [preview](https://htmlpreview.github.io/?https://github.com/Pawel-Zygler/testofilos/blob/ui/classic/index.html) |
 
-> **Preview any branch locally:**
+> Podgląd działa przez [htmlpreview.github.io](https://htmlpreview.github.io) — renderuje HTML z dowolnego brancha bez deploymentu.
+
+> **Lokalnie:**
 > ```bash
-> git checkout ui/retro   # or ui/modern, ui/minimalist, ui/classic
+> git checkout ui/retro   # lub ui/modern, ui/minimalist, ui/classic
 > open index.html
 > ```
 
