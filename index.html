@@ -32,17 +32,49 @@
 
       /* =================== LAYOUT =================== */
       .page {
-        max-width: 640px;
+        max-width: 1060px;
         margin: 0 auto;
         padding: 0 1.5rem;
       }
 
-      /* =================== TOC =================== */
+      .content-grid {
+        display: grid;
+        grid-template-columns: minmax(0, 736px) 240px;
+        gap: 4rem;
+        align-items: start;
+        justify-content: space-between;
+      }
+
+      @media (max-width: 860px) {
+        .content-grid {
+          grid-template-columns: 1fr;
+          gap: 2rem;
+        }
+        .sidebar { order: -1; margin-bottom: 2rem; }
+      }
+
+      /* =================== SIDEBAR & TOC =================== */
+      .sidebar {
+        position: sticky;
+        top: 2rem;
+        border-left: 1px solid var(--line);
+        padding-left: 1.5rem;
+      }
+
+      @media (max-width: 860px) {
+        .sidebar {
+          position: static;
+          border-left: none;
+          padding-left: 0;
+          border-bottom: 1px solid var(--line);
+          padding-bottom: 1.5rem;
+        }
+      }
+
       .toc {
-        margin-bottom: 3.5rem;
-        padding: 1.25rem 0;
-        border-top: 1px solid var(--line);
-        border-bottom: 1px solid var(--line);
+        margin-bottom: 0;
+        padding: 0;
+        border: none;
       }
 
       .toc-label {
@@ -59,8 +91,7 @@
         list-style: none;
         padding: 0;
         margin: 0;
-        columns: 2;
-        column-gap: 2rem;
+        columns: 1;
       }
 
       .toc-list li {
@@ -374,29 +405,8 @@
       </header>
 
       <!-- ===== POLISH ===== -->
-      <div id="pl-content">
+      <div id="pl-content" class="content-grid">
         <article>
-
-          <!-- TOC -->
-          <nav class="toc" aria-label="Spis treści">
-            <span class="toc-label">Spis treści</span>
-            <ul class="toc-list">
-              <li><a href="#pl-intro"><span class="toc-num">01</span>Czym jest filozofia?</a></li>
-              <li><a href="#pl-why"><span class="toc-num">02</span>Potrzeba testerów</a></li>
-              <li><a href="#pl-software"><span class="toc-num">03</span>Czym jest oprogramowanie?</a></li>
-              <li><a href="#pl-bug"><span class="toc-num">04</span>Co to jest błąd?</a></li>
-              <li><a href="#pl-consequences"><span class="toc-num">05</span>Następstwa błędów</a></li>
-              <li><a href="#pl-test"><span class="toc-num">06</span>Co to jest test?</a></li>
-              <li><a href="#pl-types"><span class="toc-num">07</span>Typy testów</a></li>
-              <li><a href="#pl-coverage"><span class="toc-num">08</span>Pełne pokrycie</a></li>
-              <li><a href="#pl-select"><span class="toc-num">09</span>Dobór testów</a></li>
-              <li><a href="#pl-quality"><span class="toc-num">10</span>Jakość oprogramowania</a></li>
-              <li><a href="#pl-summary"><span class="toc-num">11</span>Streszczenie</a></li>
-              <li><a href="#pl-laws"><span class="toc-num">12</span>Prawa testowania</a></li>
-              <li><a href="#pl-sources"><span class="toc-num">13</span>Źródła</a></li>
-              <li><a href="#pl-contact"><span class="toc-num">14</span>Kontakt</a></li>
-            </ul>
-          </nav>
 
           <section id="pl-intro">
             <h2>Wstęp</h2>
@@ -746,32 +756,34 @@
           </section>
 
         </article>
+        
+        <aside class="sidebar">
+          <!-- TOC -->
+          <nav class="toc" aria-label="Spis treści">
+            <span class="toc-label">Spis treści</span>
+            <ul class="toc-list">
+              <li><a href="#pl-intro"><span class="toc-num">01</span>Czym jest filozofia?</a></li>
+              <li><a href="#pl-why"><span class="toc-num">02</span>Potrzeba testerów</a></li>
+              <li><a href="#pl-software"><span class="toc-num">03</span>Czym jest oprogramowanie?</a></li>
+              <li><a href="#pl-bug"><span class="toc-num">04</span>Co to jest błąd?</a></li>
+              <li><a href="#pl-consequences"><span class="toc-num">05</span>Następstwa błędów</a></li>
+              <li><a href="#pl-test"><span class="toc-num">06</span>Co to jest test?</a></li>
+              <li><a href="#pl-types"><span class="toc-num">07</span>Typy testów</a></li>
+              <li><a href="#pl-coverage"><span class="toc-num">08</span>Pełne pokrycie</a></li>
+              <li><a href="#pl-select"><span class="toc-num">09</span>Dobór testów</a></li>
+              <li><a href="#pl-quality"><span class="toc-num">10</span>Jakość oprogramowania</a></li>
+              <li><a href="#pl-summary"><span class="toc-num">11</span>Streszczenie</a></li>
+              <li><a href="#pl-laws"><span class="toc-num">12</span>Prawa testowania</a></li>
+              <li><a href="#pl-sources"><span class="toc-num">13</span>Źródła</a></li>
+              <li><a href="#pl-contact"><span class="toc-num">14</span>Kontakt</a></li>
+            </ul>
+          </nav>
+        </aside>
       </div><!-- end pl-content -->
 
       <!-- ===== ENGLISH ===== -->
-      <div id="en-content" class="hidden">
+      <div id="en-content" class="content-grid hidden">
         <article>
-
-          <!-- TOC -->
-          <nav class="toc" aria-label="Table of Contents">
-            <span class="toc-label">Table of Contents</span>
-            <ul class="toc-list">
-              <li><a href="#en-intro"><span class="toc-num">01</span>What is Philosophy?</a></li>
-              <li><a href="#en-why"><span class="toc-num">02</span>Need for Testers</a></li>
-              <li><a href="#en-software"><span class="toc-num">03</span>What is Software?</a></li>
-              <li><a href="#en-bug"><span class="toc-num">04</span>What is a Bug?</a></li>
-              <li><a href="#en-consequences"><span class="toc-num">05</span>Consequences of Bugs</a></li>
-              <li><a href="#en-test"><span class="toc-num">06</span>What is a Test?</a></li>
-              <li><a href="#en-types"><span class="toc-num">07</span>Types of Tests</a></li>
-              <li><a href="#en-coverage"><span class="toc-num">08</span>Full Coverage</a></li>
-              <li><a href="#en-select"><span class="toc-num">09</span>Selecting Tests</a></li>
-              <li><a href="#en-quality"><span class="toc-num">10</span>Software Quality</a></li>
-              <li><a href="#en-summary"><span class="toc-num">11</span>Summary</a></li>
-              <li><a href="#en-laws"><span class="toc-num">12</span>Laws of Testing</a></li>
-              <li><a href="#en-sources"><span class="toc-num">13</span>Sources</a></li>
-              <li><a href="#en-contact"><span class="toc-num">14</span>Contact</a></li>
-            </ul>
-          </nav>
 
           <section id="en-intro">
             <h2>Introduction</h2>
@@ -970,6 +982,29 @@
           </section>
 
         </article>
+        
+        <aside class="sidebar">
+          <!-- TOC -->
+          <nav class="toc" aria-label="Table of Contents">
+            <span class="toc-label">Table of Contents</span>
+            <ul class="toc-list">
+              <li><a href="#en-intro"><span class="toc-num">01</span>What is Philosophy?</a></li>
+              <li><a href="#en-why"><span class="toc-num">02</span>Need for Testers</a></li>
+              <li><a href="#en-software"><span class="toc-num">03</span>What is Software?</a></li>
+              <li><a href="#en-bug"><span class="toc-num">04</span>What is a Bug?</a></li>
+              <li><a href="#en-consequences"><span class="toc-num">05</span>Consequences of Bugs</a></li>
+              <li><a href="#en-test"><span class="toc-num">06</span>What is a Test?</a></li>
+              <li><a href="#en-types"><span class="toc-num">07</span>Types of Tests</a></li>
+              <li><a href="#en-coverage"><span class="toc-num">08</span>Full Coverage</a></li>
+              <li><a href="#en-select"><span class="toc-num">09</span>Selecting Tests</a></li>
+              <li><a href="#en-quality"><span class="toc-num">10</span>Software Quality</a></li>
+              <li><a href="#en-summary"><span class="toc-num">11</span>Summary</a></li>
+              <li><a href="#en-laws"><span class="toc-num">12</span>Laws of Testing</a></li>
+              <li><a href="#en-sources"><span class="toc-num">13</span>Sources</a></li>
+              <li><a href="#en-contact"><span class="toc-num">14</span>Contact</a></li>
+            </ul>
+          </nav>
+        </aside>
       </div><!-- end en-content -->
 
       <footer class="site-footer">
