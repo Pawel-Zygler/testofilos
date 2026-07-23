@@ -37,6 +37,111 @@
         padding: 0 1.5rem;
       }
 
+      /* =================== TOC =================== */
+      .toc {
+        margin-bottom: 3.5rem;
+        padding: 1.25rem 0;
+        border-top: 1px solid var(--line);
+        border-bottom: 1px solid var(--line);
+      }
+
+      .toc-label {
+        font-family: 'DM Mono', monospace;
+        font-size: 0.62rem;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: var(--text-dim);
+        display: block;
+        margin-bottom: 0.75rem;
+      }
+
+      .toc-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        columns: 2;
+        column-gap: 2rem;
+      }
+
+      .toc-list li {
+        font-size: 0.8rem;
+        color: var(--text-secondary);
+        margin-bottom: 0.35rem;
+        padding-left: 0;
+        line-height: 1.5;
+        break-inside: avoid;
+      }
+
+      .toc-list li::before { display: none; }
+
+      .toc-list a {
+        color: var(--text-secondary);
+        text-decoration: none;
+        display: flex;
+        gap: 0.5rem;
+        align-items: baseline;
+      }
+
+      .toc-list a:hover { color: var(--text); }
+
+      .toc-num {
+        font-family: 'DM Mono', monospace;
+        font-size: 0.62rem;
+        color: var(--text-dim);
+        flex-shrink: 0;
+      }
+
+      @media (max-width: 480px) {
+        .toc-list { columns: 1; }
+      }
+
+      /* =================== LAWS SECTION =================== */
+      .laws-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        counter-reset: law-counter;
+      }
+
+      .laws-list li {
+        font-size: 0.9rem;
+        color: var(--text-secondary);
+        line-height: 1.75;
+        margin-bottom: 1.25rem;
+        padding-left: 2rem;
+        position: relative;
+        counter-increment: law-counter;
+      }
+
+      .laws-list li::before {
+        content: counter(law-counter, upper-roman);
+        position: absolute;
+        left: 0;
+        font-family: 'DM Mono', monospace;
+        font-size: 0.65rem;
+        color: var(--text-dim);
+        top: 0.3em;
+        letter-spacing: 0.05em;
+      }
+
+      .laws-list li:last-child { margin-bottom: 0; }
+
+      /* =================== CONTACT =================== */
+      .contact-block {
+        margin-top: 0.5rem;
+      }
+
+      .contact-block a {
+        font-size: 0.9rem;
+        color: var(--text);
+        text-decoration: none;
+        border-bottom: 1px solid var(--line);
+        padding-bottom: 1px;
+        transition: border-color 0.2s;
+      }
+
+      .contact-block a:hover { border-color: var(--text); }
+
       /* =================== HEADER =================== */
       .site-header {
         padding: 5rem 0 3rem;
@@ -272,7 +377,28 @@
       <div id="pl-content">
         <article>
 
-          <section>
+          <!-- TOC -->
+          <nav class="toc" aria-label="Spis treści">
+            <span class="toc-label">Spis treści</span>
+            <ul class="toc-list">
+              <li><a href="#pl-intro"><span class="toc-num">01</span>Czym jest filozofia?</a></li>
+              <li><a href="#pl-why"><span class="toc-num">02</span>Potrzeba testerów</a></li>
+              <li><a href="#pl-software"><span class="toc-num">03</span>Czym jest oprogramowanie?</a></li>
+              <li><a href="#pl-bug"><span class="toc-num">04</span>Co to jest błąd?</a></li>
+              <li><a href="#pl-consequences"><span class="toc-num">05</span>Następstwa błędów</a></li>
+              <li><a href="#pl-test"><span class="toc-num">06</span>Co to jest test?</a></li>
+              <li><a href="#pl-types"><span class="toc-num">07</span>Typy testów</a></li>
+              <li><a href="#pl-coverage"><span class="toc-num">08</span>Pełne pokrycie</a></li>
+              <li><a href="#pl-select"><span class="toc-num">09</span>Dobór testów</a></li>
+              <li><a href="#pl-quality"><span class="toc-num">10</span>Jakość oprogramowania</a></li>
+              <li><a href="#pl-summary"><span class="toc-num">11</span>Streszczenie</a></li>
+              <li><a href="#pl-laws"><span class="toc-num">12</span>Prawa testowania</a></li>
+              <li><a href="#pl-sources"><span class="toc-num">13</span>Źródła</a></li>
+              <li><a href="#pl-contact"><span class="toc-num">14</span>Kontakt</a></li>
+            </ul>
+          </nav>
+
+          <section id="pl-intro">
             <h2>Wstęp</h2>
             <h3>Czym jest filozofia?</h3>
             <p>
@@ -304,7 +430,7 @@
             </p>
           </section>
 
-          <section>
+          <section id="pl-why">
             <h2>Filozofia testowania · Część pierwsza</h2>
             <h3>Dlaczego istnieje potrzeba zatrudniania testerów?</h3>
             <p>
@@ -322,7 +448,7 @@
             </p>
           </section>
 
-          <section>
+          <section id="pl-software">
             <h3>Czym jest oprogramowanie?</h3>
             <p>
               Najszerzej rozumiane, oprogramowanie to zestaw programów wydających
@@ -360,7 +486,7 @@
             </p>
           </section>
 
-          <section>
+          <section id="pl-bug">
             <h3>Co to jest błąd?</h3>
             <p>
               W dalszym rozwoju pracy należałoby zdefiniować co to jest błąd? Jest to
@@ -378,7 +504,7 @@
             </p>
           </section>
 
-          <section>
+          <section id="pl-consequences">
             <h3>Jakie są następstwa istnienia błędów?</h3>
             <p>
               Jakie są konsekwencje istnienia błędów w oprogramowaniu? W takiej sytuacji
@@ -395,7 +521,7 @@
             </p>
           </section>
 
-          <section>
+          <section id="pl-test">
             <h3>Co to jest test?</h3>
             <p>
               Co musi zawierać w sobie test, aby test był testem? Musi coś asercjonować.
@@ -425,7 +551,7 @@
             </div>
           </section>
 
-          <section>
+          <section id="pl-types">
             <h3>Jakie główne typy testów wyróżniamy?</h3>
             <p>
               E2E zakłada że wszystkie systemy są włączone i działają, taki test swoje
@@ -447,7 +573,7 @@
             </p>
           </section>
 
-          <section>
+          <section id="pl-coverage">
             <h3>Czy pokrycie wszystkich przypadków użycia jest możliwe?</h3>
             <p>
               Co powinien zawierać w sobie test by otrzymać prawdziwe rezultaty o
@@ -486,7 +612,7 @@
             </div>
           </section>
 
-          <section>
+          <section id="pl-select">
             <h3>Jak dobrać testy pod SUT?</h3>
             <p>
               Czy dobór zestawu testów to wszystko co stanowi o sukcesie uzyskanych
@@ -504,7 +630,7 @@
             </p>
           </section>
 
-          <section>
+          <section id="pl-quality">
             <h3>Kiedy oprogramowanie jest wysokiej jakości?</h3>
             <p>
               Powróćmy do kwestii niskiej bądź wysokiej jakości. Kiedy uznać że
@@ -547,7 +673,7 @@
             </p>
           </section>
 
-          <section>
+          <section id="pl-summary">
             <h2>Streszczenie</h2>
             <p>
               Filozofia testowania stawia pytania o najdalsze przyczyny w dziedzinie
@@ -565,14 +691,58 @@
 
           <hr/>
 
-          <section class="footnotes">
-            <h3>Rodła</h3>
+          <!-- PRAWA -->
+          <section id="pl-laws">
+            <h2>Prawa testowania</h2>
+            <ul class="laws-list">
+              <li>
+                <strong>Prawo informacji.</strong> Celem testowania jest uzyskanie jak najdoskonalszej informacji o SUT. Testowanie, informując o zastanym stanie systemu, poznaje jego jakość.
+              </li>
+              <li>
+                <strong>Prawo aksjomatu.</strong> Podstawowym aksjomatem testowania jest założenie, iż oprogramowanie posiada błędy. Celem testowania jest ich wykrycie.
+              </li>
+              <li>
+                <strong>Prawo asercji.</strong> Każdy test musi dawać wynik: prawda, fałsz lub nieznany. Bez asercji nie ma testu.
+              </li>
+              <li>
+                <strong>Prawo granic.</strong> Typ testów ogranicza co możliwe do poznania o SUT. Każdy typ testu ma swoje możliwości i granice z istoty swojej definicji.
+              </li>
+              <li>
+                <strong>Prawo ryzyka.</strong> Odpowiednio dobrany zestaw testów pozwoli zmniejszyć ryzyko proporcjonalnie do doskonałości doboru testów. Testowanie nie gwarantuje braku błędów, znacząco zmniejsza ryzyko ich wystąpienia.
+              </li>
+              <li>
+                <strong>Prawo jakości.</strong> Testowanie nie ulepsza produktu — tylko poznaje czy jest zły bądź dobry. Testowanie to poznanie jakości, nie jej zapewnienie.
+              </li>
+              <li>
+                <strong>Prawo inspekcji.</strong> Zapewnienie jakości nie jest przedmiotem testowania, jest jego następstwem. Proces zapewniania jakości jest proaktywny i prewentywny. Testowanie jest reaktywne — jest inspekcją.
+              </li>
+            </ul>
+          </section>
+
+          <hr/>
+
+          <!-- ŹRÓDŁA -->
+          <section id="pl-sources">
+            <h2>Źródła i rodła</h2>
+            <p style="font-size:0.82rem;color:var(--text-dim);margin-bottom:1.25rem;">Publikacje i standardy, na których opiera się niniejsza praca.</p>
+
             <div class="fn-entry" id="fn:pl-1">1. <strong>Aksjomat:</strong> założenie, którego nie trzeba dowodzić, aby na nim zbudować dalszą teorię. <a href="#fnref:pl-1">↑</a></div>
             <div class="fn-entry" id="fn:2">2. <strong>SUT (System Under Test):</strong> system, który jest poddawany testowaniu w celu oceny jego funkcjonalności i jakości. <a href="#fnref:2">↑</a></div>
-            <div class="fn-entry" id="fn:3">3. <strong>ISO/IEC 25010:</strong> międzynarodowy standard jakości oprogramowania. <a href="#fnref:3">↑</a></div>
-            <div class="fn-entry" id="fn:pl-4">4. <strong>Filozofia i jej zadanie, s29, ks. Marian Morawski. Lwów 1881r.</strong> <a href="#fnref:pl-4">↑</a></div>
-            <div class="fn-entry" id="fn:5">5. <strong>"The Philosophy of Testing"</strong> — Max Kanat-Alexander. <a href="https://www.codesimplicity.com/post/the-philosophy-of-testing/" target="_blank">codesimplicity.com</a> <a href="#fnref:5">↑</a></div>
-            <div class="fn-entry" id="fn:6">6. <strong>"Testing vs. Checking"</strong> — Michael Bolton. <a href="https://developsense.com/blog/2009/08/testing-vs-checking" target="_blank">developsense.com</a> <a href="#fnref:6">↑</a></div>
+            <div class="fn-entry" id="fn:3">3. <strong>ISO/IEC 25010:</strong> międzynarodowy standard jakości oprogramowania, który definiuje m.in. model jakości produktu oprogramowania, dzieląc ją na cechy wewnętrzne i zewnętrzne. <a href="#fnref:3">↑</a></div>
+            <div class="fn-entry" id="fn:pl-4">4. <strong>Filozofia i jej zadanie, s29, ks. Marian Morawski. Lwów 1881r.</strong> Cytat otwierający rozważania o naturze pytań filozoficznych. <a href="#fnref:pl-4">↑</a></div>
+            <div class="fn-entry" id="fn:5">5. <strong>"The Philosophy of Testing"</strong> — Max Kanat-Alexander. <a href="https://www.codesimplicity.com/post/the-philosophy-of-testing/" target="_blank">codesimplicity.com</a> — esej o naturze asercji i granic testów. <a href="#fnref:5">↑</a></div>
+            <div class="fn-entry" id="fn:6">6. <strong>"Testing vs. Checking"</strong> — Michael Bolton. <a href="https://developsense.com/blog/2009/08/testing-vs-checking" target="_blank">developsense.com</a> — rozróżnienie między testowaniem a weryfikacją, źródło pojęcia testowania jako inspekcji. <a href="#fnref:6">↑</a></div>
+          </section>
+
+          <hr/>
+
+          <!-- KONTAKT -->
+          <section id="pl-contact">
+            <h2>Kontakt</h2>
+            <p>Pytania, uwagi i komentarze dotyczące treści artykułu są mile widziane.</p>
+            <div class="contact-block">
+              <a href="mailto:pawel.zygler@gmail.com">pawel.zygler@gmail.com</a>
+            </div>
           </section>
 
         </article>
@@ -582,7 +752,28 @@
       <div id="en-content" class="hidden">
         <article>
 
-          <section>
+          <!-- TOC -->
+          <nav class="toc" aria-label="Table of Contents">
+            <span class="toc-label">Table of Contents</span>
+            <ul class="toc-list">
+              <li><a href="#en-intro"><span class="toc-num">01</span>What is Philosophy?</a></li>
+              <li><a href="#en-why"><span class="toc-num">02</span>Need for Testers</a></li>
+              <li><a href="#en-software"><span class="toc-num">03</span>What is Software?</a></li>
+              <li><a href="#en-bug"><span class="toc-num">04</span>What is a Bug?</a></li>
+              <li><a href="#en-consequences"><span class="toc-num">05</span>Consequences of Bugs</a></li>
+              <li><a href="#en-test"><span class="toc-num">06</span>What is a Test?</a></li>
+              <li><a href="#en-types"><span class="toc-num">07</span>Types of Tests</a></li>
+              <li><a href="#en-coverage"><span class="toc-num">08</span>Full Coverage</a></li>
+              <li><a href="#en-select"><span class="toc-num">09</span>Selecting Tests</a></li>
+              <li><a href="#en-quality"><span class="toc-num">10</span>Software Quality</a></li>
+              <li><a href="#en-summary"><span class="toc-num">11</span>Summary</a></li>
+              <li><a href="#en-laws"><span class="toc-num">12</span>Laws of Testing</a></li>
+              <li><a href="#en-sources"><span class="toc-num">13</span>Sources</a></li>
+              <li><a href="#en-contact"><span class="toc-num">14</span>Contact</a></li>
+            </ul>
+          </nav>
+
+          <section id="en-intro">
             <h2>Introduction</h2>
             <h3>What is Philosophy?</h3>
             <p>
@@ -607,7 +798,7 @@
             </p>
           </section>
 
-          <section>
+          <section id="en-why">
             <h2>Philosophy of Testing · Part One</h2>
             <h3>Why Is There a Need to Hire Testers?</h3>
             <p>
@@ -616,7 +807,7 @@
             </p>
           </section>
 
-          <section>
+          <section id="en-software">
             <h3>What is Software?</h3>
             <p>
               Broadly defined, software is a collection of programs that issue instructions to a computer. It can be divided into operating systems (managing hardware and providing services) and application software (performing specific tasks for users). Software always has an expected behavior defined before it is created.
@@ -629,7 +820,7 @@
             </p>
           </section>
 
-          <section>
+          <section id="en-bug">
             <h3>What is a Bug?</h3>
             <p>
               A bug is a deviation of software behavior from its requirements. The existence of a bug implies that software has a defined intended behavior.
@@ -639,14 +830,14 @@
             </p>
           </section>
 
-          <section>
+          <section id="en-consequences">
             <h3>What Are the Consequences of Bugs?</h3>
             <p>
               When bugs exist, software does not meet expectations; hence, bugs must be eliminated for it to function properly. Another consequence is that bugs trigger the need to fix the system and subsequently verify the effectiveness of fixes. Detecting deviations is the responsibility of executed tests.
             </p>
           </section>
 
-          <section>
+          <section id="en-test">
             <h3>What is a Test?</h3>
             <p>
               What must a test contain in order to be a test? It must make an assertion. Every test must yield a result of true, false, or unknown. Otherwise, we cannot validate behavior<sup id="fnref:en-5"><a href="#fn:en-5">5</a></sup>.
@@ -660,7 +851,7 @@
             </div>
           </section>
 
-          <section>
+          <section id="en-types">
             <h3>What Are the Main Types of Tests?</h3>
             <p>
               E2E assumes all systems are on and working; such a test draws its boundaries the furthest, allowing testing of complete system logic. Integration tests check how two or more system components behave together. A unit or component test is the most restrictive in what it checks. It isolates a single component to check its behavior.
@@ -671,7 +862,7 @@
             </div>
           </section>
 
-          <section>
+          <section id="en-coverage">
             <h3>Is Covering All Use Cases Possible?</h3>
             <p>
               Is full test coverage of all use cases possible? Then we would have perfect knowledge. The answer is no — a fuel-purchasing app in 18 countries with billions of permutations illustrates the impossibility of exhaustive testing.
@@ -685,7 +876,7 @@
             </div>
           </section>
 
-          <section>
+          <section id="en-select">
             <h3>How to Select Tests for a SUT?</h3>
             <p>
               Success depends on several factors: Thorough analysis of requirements and the actual state of the SUT. Correct configuration of the environment and data. Proper execution of tests. Accurate collection of results. Effective communication of results to stakeholders.
@@ -695,7 +886,7 @@
             </p>
           </section>
 
-          <section>
+          <section id="en-quality">
             <h3>When is Software High Quality?</h3>
             <p>
               Let us distinguish between internal quality (before release) and external quality (after release), according to ISO/IEC 25010<sup id="fnref:en-3"><a href="#fn:en-3">3</a></sup>.
@@ -715,7 +906,7 @@
             </div>
           </section>
 
-          <section>
+          <section id="en-summary">
             <h2>Summary</h2>
             <p>
               The philosophy of testing asks ultimate questions: What is a bug? What is the purpose of testing? Software exists to help people; Testing exists to deliver reliable information about software. Bugs are deviations from requirements. Tests must assert (true/false/unknown), each with limits defined by type and maturity. Testing of complex systems cannot achieve complete coverage. Quality is internal (requirements + acceptable risk) and external (user expectations), and testing only observes it. Testing is not quality assurance but quality discovery.
@@ -724,14 +915,58 @@
 
           <hr/>
 
-          <section class="footnotes">
-            <h3>Sources</h3>
+          <!-- LAWS -->
+          <section id="en-laws">
+            <h2>Laws of Testing</h2>
+            <ul class="laws-list">
+              <li>
+                <strong>Law of Information.</strong> The purpose of testing is to obtain the most reliable information possible about the SUT. Testing, by reporting on the actual state of the system, gets to know its quality.
+              </li>
+              <li>
+                <strong>Law of the Axiom.</strong> The fundamental axiom of testing is that software contains bugs. The purpose of testing is to detect them.
+              </li>
+              <li>
+                <strong>Law of Assertion.</strong> Every test must yield a result: true, false, or unknown. Without an assertion, there is no test.
+              </li>
+              <li>
+                <strong>Law of Limits.</strong> The type of test limits what is possible to learn about the SUT. Each test type has capabilities and boundaries inherent to its definition.
+              </li>
+              <li>
+                <strong>Law of Risk.</strong> An appropriately designed test suite reduces risk in proportion to the quality of its design. Testing does not guarantee bug-free software; it significantly reduces risk.
+              </li>
+              <li>
+                <strong>Law of Quality.</strong> Testing does not improve a product — it only discovers whether it is good or bad. Testing is the discovery of quality, not its assurance.
+              </li>
+              <li>
+                <strong>Law of Inspection.</strong> Quality assurance is not the subject of testing but its consequence. QA is proactive and preventive. Testing is reactive — it is inspection.
+              </li>
+            </ul>
+          </section>
+
+          <hr/>
+
+          <!-- SOURCES -->
+          <section id="en-sources">
+            <h2>Sources</h2>
+            <p style="font-size:0.82rem;color:var(--text-dim);margin-bottom:1.25rem;">Publications and standards that inform this work.</p>
+
             <div class="fn-entry" id="fn:en-1">1. <strong>Axiom:</strong> a statement regarded as self-evidently true, used as a basis for further theory. <a href="#fnref:en-1">↑</a></div>
             <div class="fn-entry" id="fn:en-2">2. <strong>SUT (System Under Test):</strong> a system being tested for its functionality and quality. <a href="#fnref:en-2">↑</a></div>
-            <div class="fn-entry" id="fn:en-3">3. <strong>ISO/IEC 25010:</strong> an international standard for software quality. <a href="#fnref:en-3">↑</a></div>
-            <div class="fn-entry" id="fn:en-4">4. <strong>"Filozofia i jej zadanie, s29, ks. Marian Morawski. Lwów 1881r."</strong> <a href="#fnref:en-4">↑</a></div>
-            <div class="fn-entry" id="fn:en-5">5. <strong>"The Philosophy of Testing"</strong> — Max Kanat-Alexander. <a href="https://www.codesimplicity.com/post/the-philosophy-of-testing/" target="_blank">codesimplicity.com</a> <a href="#fnref:en-5">↑</a></div>
-            <div class="fn-entry" id="fn:en-6">6. <strong>"Testing vs. Checking"</strong> — Michael Bolton. <a href="https://developsense.com/blog/2009/08/testing-vs-checking" target="_blank">developsense.com</a> <a href="#fnref:en-6">↑</a></div>
+            <div class="fn-entry" id="fn:en-3">3. <strong>ISO/IEC 25010:</strong> an international standard for software quality that defines the software product quality model, dividing it into internal and external characteristics. <a href="#fnref:en-3">↑</a></div>
+            <div class="fn-entry" id="fn:en-4">4. <strong>"Filozofia i jej zadanie, s29, ks. Marian Morawski. Lwów 1881r."</strong> Opening quote on the nature of philosophical questions. <a href="#fnref:en-4">↑</a></div>
+            <div class="fn-entry" id="fn:en-5">5. <strong>"The Philosophy of Testing"</strong> — Max Kanat-Alexander. <a href="https://www.codesimplicity.com/post/the-philosophy-of-testing/" target="_blank">codesimplicity.com</a> — essay on the nature of assertion and the limits of tests. <a href="#fnref:en-5">↑</a></div>
+            <div class="fn-entry" id="fn:en-6">6. <strong>"Testing vs. Checking"</strong> — Michael Bolton. <a href="https://developsense.com/blog/2009/08/testing-vs-checking" target="_blank">developsense.com</a> — distinction between testing and verification; source of the concept of testing as inspection. <a href="#fnref:en-6">↑</a></div>
+          </section>
+
+          <hr/>
+
+          <!-- CONTACT -->
+          <section id="en-contact">
+            <h2>Contact</h2>
+            <p>Questions, remarks, and comments regarding the content of this article are welcome.</p>
+            <div class="contact-block">
+              <a href="mailto:pawel.zygler@gmail.com">pawel.zygler@gmail.com</a>
+            </div>
           </section>
 
         </article>
