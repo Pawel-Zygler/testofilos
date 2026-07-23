@@ -12,9 +12,9 @@ Four redesigned branches — same content, different aesthetic:
 
 | Branch | Style | 🔗 Live Preview |
 |--------|-------|-----------------|
+| [`main` (default)](https://github.com/Pawel-Zygler/testofilos) | ⬜ Editorial white / zero decoration | [Live site](https://pawel-zygler.github.io/testofilos/) |
 | [`ui/retro`](https://github.com/Pawel-Zygler/testofilos/tree/ui/retro) | 🟢 CRT terminal / phosphor-green | [preview](https://htmlpreview.github.io/?https://github.com/Pawel-Zygler/testofilos/blob/ui/retro/index.html) |
 | [`ui/modern`](https://github.com/Pawel-Zygler/testofilos/tree/ui/modern) | 🟣 Glassmorphism dark / gradient orbs | [preview](https://htmlpreview.github.io/?https://github.com/Pawel-Zygler/testofilos/blob/ui/modern/index.html) |
-| [`ui/minimalist`](https://github.com/Pawel-Zygler/testofilos/tree/ui/minimalist) | ⬜ Editorial white / zero decoration | [preview](https://htmlpreview.github.io/?https://github.com/Pawel-Zygler/testofilos/blob/ui/minimalist/index.html) |
 | [`ui/classic`](https://github.com/Pawel-Zygler/testofilos/tree/ui/classic) | 📰 Newspaper / academic serif | [preview](https://htmlpreview.github.io/?https://github.com/Pawel-Zygler/testofilos/blob/ui/classic/index.html) |
 
 > Podgląd działa przez [htmlpreview.github.io](https://htmlpreview.github.io) — renderuje HTML z dowolnego brancha bez deploymentu.
@@ -40,9 +40,9 @@ Four redesigned branches — same content, different aesthetic:
 - Pullout quotes (dark background + gold left border) for axioms
 - Cream `#fdf8f0` background, crimson `#8b2c2c` accent
 
-#### `ui/minimalist` — Editorial white
+#### `main` (formerly `ui/minimalist`) — Editorial white
 - DM Sans + DM Mono — clean sans-serif reading experience
-- Single 640px column, zero visual decoration
+- Two-column grid with a sticky right sidebar for the Table of Contents
 - Sections separated by thin `1px` rules only
 - `note` component (light grey box) for axioms/certainties
 - Monospace chapter markers and footnote labels
@@ -69,7 +69,7 @@ Four redesigned branches — same content, different aesthetic:
 
 ### Earlier
 
-#### Initial release — `main`
+#### Legacy `main` (Dark theme)
 - Dark navy theme (`#0b0d19`) with animated dot-grid background
 - Tailwind CSS utility classes
 - Inter font
