@@ -1,77 +1,31 @@
 # testofilos
 
-philosophy of testing
+Philosophy of testing / Filozofia testowania.
 
-**Live:** [filoqa](https://pawel-zygler.github.io/testofilos/ "philosophy of testing") _(opens in a new tab)_
+**Live Site:** [filoqa](https://pawel-zygler.github.io/testofilos/)
 
 ---
 
-## UI Variants
+## Layout & Design
 
-Four redesigned branches — same content, different aesthetic:
+The site uses a clean, editorial layout inspired by long-form publications:
+- **Typography:** DM Sans + DM Mono for a clean, aesthetic reading experience.
+- **Justified Text:** Paragraphs, blockquotes, and lists are justified (`text-align: justify;` with hyphens) to ensure neat margins without ragged edges.
+- **Structure:** Two-column grid with a sticky right sidebar featuring a Table of Contents.
+- **Bilingual:** Interactive toggle for Polish (PL) and English (EN) content with language-aware hyphenation.
 
-| Branch | Style | 🔗 Live Preview |
-|--------|-------|-----------------|
-| [`main` (default)](https://github.com/Pawel-Zygler/testofilos) | ⬜ Editorial white / zero decoration | [Live site](https://pawel-zygler.github.io/testofilos/) |
-| [`ui/retro`](https://github.com/Pawel-Zygler/testofilos/tree/ui/retro) | 🟢 CRT terminal / phosphor-green | [preview](https://htmlpreview.github.io/?https://github.com/Pawel-Zygler/testofilos/blob/ui/retro/index.html) |
-| [`ui/modern`](https://github.com/Pawel-Zygler/testofilos/tree/ui/modern) | 🟣 Glassmorphism dark / gradient orbs | [preview](https://htmlpreview.github.io/?https://github.com/Pawel-Zygler/testofilos/blob/ui/modern/index.html) |
-| [`ui/classic`](https://github.com/Pawel-Zygler/testofilos/tree/ui/classic) | 📰 Newspaper / academic serif | [preview](https://htmlpreview.github.io/?https://github.com/Pawel-Zygler/testofilos/blob/ui/classic/index.html) |
+---
 
-> Podgląd działa przez [htmlpreview.github.io](https://htmlpreview.github.io) — renderuje HTML z dowolnego brancha bez deploymentu.
+## Usage
 
-> **Lokalnie:**
-> ```bash
-> git checkout ui/retro   # lub ui/modern, ui/minimalist, ui/classic
-> open index.html
-> ```
+Open `index.html` in any browser:
+
+```bash
+open index.html
+```
 
 ---
 
 ## Changelog
 
-### 2026-07-23
-
-#### `ui/classic` — Newspaper / Academic layout
-- Playfair Display serif + Source Serif 4 for body text
-- Dark masthead banner with gold rule decorations
-- Two-column grid: main article + sticky sidebar
-- Sidebar includes: Table of Contents, Laws of Testing, Sources
-- Drop cap on opening paragraph
-- Pullout quotes (dark background + gold left border) for axioms
-- Cream `#fdf8f0` background, crimson `#8b2c2c` accent
-
-#### `main` (formerly `ui/minimalist`) — Editorial white
-- DM Sans + DM Mono — clean sans-serif reading experience
-- Two-column grid with a sticky right sidebar for the Table of Contents
-- Sections separated by thin `1px` rules only
-- `note` component (light grey box) for axioms/certainties
-- Monospace chapter markers and footnote labels
-- Inspired by Substack / long-form editorial design
-
-#### `ui/modern` — Glassmorphism dark
-- Outfit + Inter fonts
-- Three animated gradient orbs floating in background (purple / cyan / pink)
-- Numbered section cards with glassmorphism borders
-- Language switcher as a pill toggle with gradient active state
-- Scroll indicator animation
-- `axiom-card` callout with gradient border and glow
-
-#### `ui/retro` — CRT terminal
-- VT323 + Share Tech Mono monospace fonts
-- Phosphor-green `#00ff41` on near-black background
-- CSS CRT scanlines overlay + vignette effect
-- Flicker animation simulating phosphor screen aging
-- Blinking block cursor on title
-- Terminal-style titlebar, prompt lines, and section `##` markers
-- Axioms shown in bordered "printout" boxes
-
----
-
-### Earlier
-
-#### Legacy `main` (Dark theme)
-- Dark navy theme (`#0b0d19`) with animated dot-grid background
-- Tailwind CSS utility classes
-- Inter font
-- Language switcher (PL / EN)
-- Footnotes with back-links (`↑`)
+Detailed release history and notable changes can be found in [CHANGELOG.md](CHANGELOG.md), which adheres to the [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) format.

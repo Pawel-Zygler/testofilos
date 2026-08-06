@@ -142,6 +142,9 @@
         padding-left: 2rem;
         position: relative;
         counter-increment: law-counter;
+        text-align: justify;
+        hyphens: auto;
+        -webkit-hyphens: auto;
       }
 
       .laws-list li::before {
@@ -262,6 +265,9 @@
         line-height: 1.85;
         color: var(--text-secondary);
         margin-bottom: 1.25rem;
+        text-align: justify;
+        hyphens: auto;
+        -webkit-hyphens: auto;
       }
 
       p:last-child { margin-bottom: 0; }
@@ -275,6 +281,9 @@
         font-size: 0.9rem;
         line-height: 1.8;
         font-style: italic;
+        text-align: justify;
+        hyphens: auto;
+        -webkit-hyphens: auto;
       }
 
       /* Aside / certainty note */
@@ -300,6 +309,9 @@
         color: var(--text);
         margin: 0;
         font-style: normal;
+        text-align: justify;
+        hyphens: auto;
+        -webkit-hyphens: auto;
       }
 
       /* Lists */
@@ -1029,6 +1041,7 @@
       };
 
       function setLanguage(lang) {
+        document.documentElement.lang = lang;
         if (lang === 'pl') {
           plContent.classList.remove('hidden');
           enContent.classList.add('hidden');
