@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Ukrainian language version (UA) encompassing the complete essay, laws of testing, footnotes, and sticky Table of Contents.
 - Language switcher support for Ukrainian (`UA`) with dynamic `lang="uk"` root attribute updating for proper hyphenation, document title, and subtitle localization.
 - System sans-serif and monospace fallback fonts to ensure clean typography rendering across Cyrillic characters.
+- Additional ProtonMail contact email (`zygler.pawel@protonmail.com`) placed under the Gmail address in all language contact sections.
 
 ### Changed
 - Updated `README.md` to reflect multilingual support (PL / EN / UA).
