@@ -53,15 +53,15 @@ test.describe('@smoke @e2e Philosophy of Testing - Language & Core Flow', () => 
     await expect(testofilos.enContent).toBeHidden();
   });
 
-  test('should display Laws of Testing in Polish version', async () => {
+  test('should display findings / ustalenia in Polish version', async () => {
     await expect(testofilos.plLaws).toBeVisible();
-    await expect(testofilos.plLaws).toContainText('Prawo informacji');
-    await expect(testofilos.plLaws).toContainText('Prawo aksjomatu');
-    await expect(testofilos.plLaws).toContainText('Prawo asercji');
-    await expect(testofilos.plLaws).toContainText('Prawo granic');
-    await expect(testofilos.plLaws).toContainText('Prawo ryzyka');
-    await expect(testofilos.plLaws).toContainText('Prawo jakości');
-    await expect(testofilos.plLaws).toContainText('Prawo inspekcji');
+    await expect(testofilos.plLaws).toContainText(/informacj/i);
+    await expect(testofilos.plLaws).toContainText(/aksjomat/i);
+    await expect(testofilos.plLaws).toContainText(/asercj/i);
+    await expect(testofilos.plLaws).toContainText(/granic/i);
+    await expect(testofilos.plLaws).toContainText(/ryzyk/i);
+    await expect(testofilos.plLaws).toContainText(/jakoś/i);
+    await expect(testofilos.plLaws).toContainText(/inspekcj/i);
   });
 
   test('should contain valid mailto contact link and footer', async () => {

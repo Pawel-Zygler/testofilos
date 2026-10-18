@@ -19,7 +19,7 @@ test.describe('@regression @data Philosophy of Testing - Component & Content Par
     expect(plItems.length).toBe(enItems.length);
   });
 
-  test('should have exact parity of 7 Laws of Testing between PL and EN', async ({ page }) => {
+  test('should have exact parity of 7 findings / principles between PL and EN', async ({ page }) => {
     // Polish laws
     const plLawsList = page.locator('#pl-laws ul li, #pl-laws ol li');
     const plLawsCount = await plLawsList.count();
