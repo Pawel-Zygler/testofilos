@@ -1,6 +1,6 @@
 # testofilos
 
-Philosophy of testing / Filozofia testowania.
+Philosophy of testing / Filozofia testowania / Філософія тестування.
 
 **Live Site:** [filoqa](https://pawel-zygler.github.io/testofilos/)
 
@@ -12,7 +12,7 @@ The site uses a clean, editorial layout inspired by long-form publications:
 - **Typography:** DM Sans + DM Mono for a clean, aesthetic reading experience.
 - **Justified Text:** Paragraphs, blockquotes, and lists are justified (`text-align: justify;` with hyphens) to ensure neat margins without ragged edges.
 - **Structure:** Two-column grid with a sticky right sidebar featuring a Table of Contents.
-- **Bilingual:** Interactive toggle for Polish (PL) and English (EN) content with language-aware hyphenation.
+- **Multilingual:** Interactive toggle for Polish (PL), English (EN), and Ukrainian (UA) content with language-aware hyphenation.
 
 ---
 

@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- Ukrainian language version (UA) encompassing the complete essay, laws of testing, footnotes, and sticky Table of Contents.
+- Language switcher support for Ukrainian (`UA`) with dynamic `lang="uk"` root attribute updating for proper hyphenation, document title, and subtitle localization.
+- System sans-serif and monospace fallback fonts to ensure clean typography rendering across Cyrillic characters.
+
+### Changed
+- Updated `README.md` to reflect multilingual support (PL / EN / UA).
+
 ## [1.1.0] - 2026-08-06
 
 ### Added
