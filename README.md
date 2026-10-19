@@ -1,4 +1,4 @@
-# testofilos
+# Filozofia testowania
 
 Philosophy of testing / Filozofia testowania / Філософія тестування.
 
@@ -8,27 +8,8 @@ Philosophy of testing / Filozofia testowania / Філософія тестува
 
 ---
 
-## Layout & Design
-
-The site uses a clean, editorial layout inspired by long-form publications:
-- **Typography:** DM Sans + DM Mono for a clean, aesthetic reading experience.
-- **Justified Text:** Paragraphs, blockquotes, and lists are justified (`text-align: justify;` with hyphens) to ensure neat margins without ragged edges.
-- **Structure:** Two-column grid with a sticky right sidebar featuring a Table of Contents.
-- **Multilingual:** Interactive toggle for Polish (PL), English (EN), and Ukrainian (UA) content with language-aware hyphenation.
-
----
-
-## Usage
-
-Open `index.html` in any browser:
-
-```bash
-open index.html
-```
-
----
-
-## Testing
+<details>
+<summary><b>Playwright Test Automation</b></summary>
 
 End-to-End and accessibility tests with Playwright & TypeScript.
 
@@ -41,6 +22,18 @@ npm test            # Run all tests
 npm run test:smoke  # Smoke tests (Deployment Blocker)
 npm run test:a11y   # Accessibility WCAG (Deployment Blocker)
 npm run report      # View HTML test report
+```
+
+</details>
+
+---
+
+## Usage
+
+Open `index.html` in any browser:
+
+```bash
+open index.html
 ```
 
 ---
