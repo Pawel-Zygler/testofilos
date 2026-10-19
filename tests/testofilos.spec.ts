@@ -79,6 +79,7 @@ test.describe('@smoke @e2e Philosophy of Testing - Language & Core Flow', () => 
 
   test('should contain valid mailto contact link and footer', async () => {
     await expect(testofilos.contactEmail.first()).toHaveAttribute('href', 'mailto:pawel.zygler@gmail.com');
+    await expect(testofilos.footer).toContainText('2026');
     await expect(testofilos.footer).toContainText('Filozofia Testowania');
   });
 });
