@@ -528,6 +528,149 @@
       #part2-content, #contact-content {
         min-height: calc(100vh - 220px);
       }
+
+      /* =================== EXPERIMENT ONE: MODERN READABILITY UI =================== */
+      html[data-theme="experiment-one"] {
+        --bg: #fbfaf8;
+        --text: #18181b;
+        --text-secondary: #334155;
+        --text-dim: #64748b;
+        --accent: #4f46e5;
+        --line: #e2e8f0;
+        --highlight: #f1f5f9;
+      }
+
+      html[data-theme="experiment-one"][data-mode="dark"] {
+        --bg: #0b0f17;
+        --text: #f8fafc;
+        --text-secondary: #cbd5e1;
+        --text-dim: #94a3b8;
+        --accent: #60a5fa;
+        --line: #1e293b;
+        --highlight: #131b2e;
+      }
+
+      html[data-theme="experiment-one"][data-mode="sepia"] {
+        --bg: #f6f1e8;
+        --text: #2c241d;
+        --text-secondary: #4d3f35;
+        --text-dim: #857467;
+        --accent: #9a5b32;
+        --line: #e5dcd0;
+        --highlight: #ede4d5;
+      }
+
+      html[data-theme="experiment-one"] body {
+        transition: background-color 0.2s ease, color 0.2s ease;
+      }
+
+      html[data-theme="experiment-one"] p {
+        color: var(--text-secondary);
+        font-size: 0.95rem;
+        line-height: 1.85;
+      }
+
+      html[data-theme="experiment-one"] blockquote {
+        border-left: 3px solid var(--accent);
+        background: var(--highlight);
+        padding: 1.1rem 1.35rem;
+        border-radius: 0 6px 6px 0;
+        color: var(--text);
+        font-style: normal;
+      }
+
+      html[data-theme="experiment-one"] .note {
+        background: var(--highlight);
+        border: 1px solid var(--line);
+        border-radius: 6px;
+      }
+
+      html[data-theme="experiment-one"] .toc-num {
+        color: var(--accent);
+        font-weight: 500;
+      }
+
+      html[data-theme="experiment-one"] .part-tab.active::after {
+        background: var(--accent);
+      }
+
+      html[data-theme="experiment-one"] ::selection {
+        background: rgba(99, 102, 241, 0.2);
+        color: var(--text);
+      }
+
+      /* Floating Modern Switcher Bar */
+      .experiment-bar {
+        position: fixed;
+        bottom: 1.5rem;
+        right: 1.5rem;
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        background: var(--bg);
+        border: 1px solid var(--line);
+        padding: 0.4rem 0.75rem;
+        border-radius: 9999px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        z-index: 1000;
+        font-family: 'DM Mono', monospace;
+        font-size: 0.72rem;
+        backdrop-filter: blur(8px);
+        transition: all 0.2s ease;
+      }
+
+      .exp-title {
+        color: var(--text-dim);
+        font-weight: 500;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        padding-right: 0.5rem;
+        border-right: 1px solid var(--line);
+      }
+
+      .exp-modes {
+        display: flex;
+        gap: 0.25rem;
+      }
+
+      .exp-btn {
+        background: none;
+        border: none;
+        color: var(--text-dim);
+        cursor: pointer;
+        padding: 0.25rem 0.5rem;
+        border-radius: 9999px;
+        font-family: inherit;
+        font-size: inherit;
+        transition: all 0.15s ease;
+      }
+
+      .exp-btn:hover {
+        color: var(--text);
+        background: var(--highlight);
+      }
+
+      .exp-btn.active {
+        color: var(--text);
+        background: var(--highlight);
+        font-weight: 500;
+      }
+
+      .exp-exit {
+        background: none;
+        border: none;
+        color: var(--text-dim);
+        cursor: pointer;
+        padding: 0.2rem 0.45rem;
+        border-radius: 50%;
+        margin-left: 0.25rem;
+        font-size: 0.75rem;
+        transition: color 0.15s ease;
+      }
+
+      .exp-exit:hover {
+        color: var(--text);
+      }
     </style>
   </head>
   <body>
@@ -1562,6 +1705,17 @@
 
     </div><!-- end page -->
 
+    <!-- ===== EXPERIMENT ONE FLOATING BAR ===== -->
+    <div id="experiment-bar" class="experiment-bar hidden" data-testid="experiment-bar">
+      <span class="exp-title">🧪 Modern UI</span>
+      <div class="exp-modes">
+        <button class="exp-btn active" data-mode="light" title="Modern Light Paper">☀️ Jasny</button>
+        <button class="exp-btn" data-mode="dark" title="Modern Dark Slate">🌙 Ciemny</button>
+        <button class="exp-btn" data-mode="sepia" title="Warm Book Sepia">📖 Sepia</button>
+      </div>
+      <button id="exp-exit-btn" class="exp-exit" title="Powrót do wersji standardowej">✕</button>
+    </div>
+
     <script>
       let currentPart = 1;
       let currentView = 'part1'; // 'part1' | 'part2' | 'contact'
@@ -1759,6 +1913,69 @@
         initialLang = 'uk';
       }
       setLanguage(initialLang);
+
+      /* =================== EXPERIMENT ONE LOGIC =================== */
+      function initExperiment() {
+        const hash = window.location.hash.toLowerCase();
+        const stored = sessionStorage.getItem('testofilos-experiment');
+        const isExperiment = hash.includes('experiment-one') || stored === 'experiment-one';
+
+        if (isExperiment) {
+          sessionStorage.setItem('testofilos-experiment', 'experiment-one');
+          document.documentElement.setAttribute('data-theme', 'experiment-one');
+
+          const savedMode = localStorage.getItem('testofilos-exp-mode') || 'light';
+          document.documentElement.setAttribute('data-mode', savedMode);
+
+          const bar = document.getElementById('experiment-bar');
+          if (bar) {
+            bar.classList.remove('hidden');
+            bar.querySelectorAll('.exp-btn').forEach(btn => {
+              btn.classList.toggle('active', btn.dataset.mode === savedMode);
+            });
+          }
+        }
+      }
+
+      function setExperimentMode(mode) {
+        document.documentElement.setAttribute('data-mode', mode);
+        localStorage.setItem('testofilos-exp-mode', mode);
+        const bar = document.getElementById('experiment-bar');
+        if (bar) {
+          bar.querySelectorAll('.exp-btn').forEach(btn => {
+            btn.classList.toggle('active', btn.dataset.mode === mode);
+          });
+        }
+      }
+
+      function exitExperiment() {
+        sessionStorage.removeItem('testofilos-experiment');
+        document.documentElement.removeAttribute('data-theme');
+        document.documentElement.removeAttribute('data-mode');
+        const bar = document.getElementById('experiment-bar');
+        if (bar) bar.classList.add('hidden');
+        if (window.location.hash.includes('experiment-one')) {
+          history.pushState('', document.title, window.location.pathname + window.location.search);
+        }
+      }
+
+      const expBar = document.getElementById('experiment-bar');
+      if (expBar) {
+        expBar.querySelectorAll('.exp-btn').forEach(btn => {
+          btn.addEventListener('click', () => setExperimentMode(btn.dataset.mode));
+        });
+        const exitBtn = document.getElementById('exp-exit-btn');
+        if (exitBtn) exitBtn.addEventListener('click', exitExperiment);
+      }
+
+      window.addEventListener('hashchange', () => {
+        if (window.location.hash.toLowerCase().includes('experiment-one')) {
+          initExperiment();
+        }
+      });
+
+      initExperiment();
     </script>
+
   </body>
 </html>

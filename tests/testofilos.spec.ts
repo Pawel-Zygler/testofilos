@@ -155,4 +155,51 @@ test.describe('@smoke @e2e Philosophy of Testing - Language & Core Flow', () => 
     await expect(testofilos.footer).toContainText('2026');
     await expect(testofilos.footer).toContainText('Filozofia Testowania');
   });
+
+  test('should activate Modern UI experiment-one with enhanced readability when navigating to #experiment-one', async ({ page }) => {
+    // Normal landing should NOT have experiment mode active
+    await expect(page.locator('#experiment-bar')).toBeHidden();
+    const defaultTheme = await page.locator('html').getAttribute('data-theme');
+    expect(defaultTheme).toBeNull();
+
+    // Navigate to #experiment-one
+    await page.goto('/#experiment-one');
+    await expect(page.locator('html')).toHaveAttribute('data-theme', 'experiment-one');
+    await expect(page.locator('#experiment-bar')).toBeVisible();
+
+    // Verify enhanced readability colors
+    const colors = await page.evaluate(() => {
+      const s = getComputedStyle(document.documentElement);
+      return {
+        bg: s.getPropertyValue('--bg').trim(),
+        textSecondary: s.getPropertyValue('--text-secondary').trim(),
+        accent: s.getPropertyValue('--accent').trim()
+      };
+    });
+    expect(colors.bg).toBe('#fbfaf8');
+    expect(colors.textSecondary).toBe('#334155');
+    expect(colors.accent).toBe('#4f46e5');
+
+    // Switch to dark mode
+    await page.locator('#experiment-bar button[data-mode="dark"]').click();
+    await expect(page.locator('html')).toHaveAttribute('data-mode', 'dark');
+    const darkBg = await page.evaluate(() => getComputedStyle(document.documentElement).getPropertyValue('--bg').trim());
+    expect(darkBg).toBe('#0b0f17');
+
+    // Switch to sepia mode
+    await page.locator('#experiment-bar button[data-mode="sepia"]').click();
+    await expect(page.locator('html')).toHaveAttribute('data-mode', 'sepia');
+    const sepiaBg = await page.evaluate(() => getComputedStyle(document.documentElement).getPropertyValue('--bg').trim());
+    expect(sepiaBg).toBe('#f6f1e8');
+
+    // Switch back to light
+    await page.locator('#experiment-bar button[data-mode="light"]').click();
+    await expect(page.locator('html')).toHaveAttribute('data-mode', 'light');
+
+    // Exit experiment cleanly
+    await page.locator('#exp-exit-btn').click();
+    await expect(page.locator('#experiment-bar')).toBeHidden();
+    const afterExitTheme = await page.locator('html').getAttribute('data-theme');
+    expect(afterExitTheme).toBeNull();
+  });
 });
