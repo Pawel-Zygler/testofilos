@@ -26,10 +26,47 @@ test.describe('@smoke @e2e Philosophy of Testing - Language & Core Flow', () => 
     await expect(testofilos.enContent).toBeHidden();
   });
 
-  test('should display frozen header sticky to the top', async () => {
+  test('should display frozen header sticky to the top and freeze sidebar below it without occlusion', async ({ page }) => {
     await expect(testofilos.frozenHeader).toBeVisible();
     const position = await testofilos.frozenHeader.evaluate(el => window.getComputedStyle(el).position);
     expect(position).toBe('sticky');
+
+    // Scroll down 1000px and verify sidebar (TOC) remains frozen and fully visible below frozen header
+    await page.evaluate(() => window.scrollTo({ top: 1000, behavior: 'instant' }));
+
+    const { headerBottom, sidebarTop, tocLabelTop, firstItemTop } = await page.evaluate(() => {
+      const header = document.querySelector('.frozen-header-wrapper')!;
+      const sidebar = document.querySelector('#pl-content .sidebar')!;
+      const tocLabel = document.querySelector('#pl-content .toc-label')!;
+      const firstItem = document.querySelector('#pl-content .toc-list li:first-child')!;
+      return {
+        headerBottom: header.getBoundingClientRect().bottom,
+        sidebarTop: sidebar.getBoundingClientRect().top,
+        tocLabelTop: tocLabel.getBoundingClientRect().top,
+        firstItemTop: firstItem.getBoundingClientRect().top
+      };
+    });
+
+    // Ensure sidebar top, Spis treści label and 01 item never slip behind frozen header
+    expect(sidebarTop).toBeGreaterThanOrEqual(headerBottom);
+    expect(tocLabelTop).toBeGreaterThanOrEqual(headerBottom);
+    expect(firstItemTop).toBeGreaterThan(headerBottom);
+  });
+
+  test('should scroll to section with proper offset when clicking TOC item', async ({ page }) => {
+    await page.locator('#pl-content .toc-list a[href="#pl-intro"]').click();
+    await page.waitForTimeout(300);
+
+    const { headerBottom, sectionTop } = await page.evaluate(() => {
+      const header = document.querySelector('.frozen-header-wrapper')!;
+      const section = document.querySelector('#pl-intro')!;
+      return {
+        headerBottom: header.getBoundingClientRect().bottom,
+        sectionTop: section.getBoundingClientRect().top
+      };
+    });
+
+    expect(sectionTop).toBeGreaterThanOrEqual(headerBottom);
   });
 
   test('should display HOME | CONTACT navigation in the top row and navigate correctly', async () => {

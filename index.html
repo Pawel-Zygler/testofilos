@@ -16,6 +16,7 @@
         --accent: #111;
         --line: #e5e5e5;
         --highlight: #f0f0f0;
+        --frozen-header-h: 235px;
       }
 
       *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -60,9 +61,11 @@
       /* =================== SIDEBAR & TOC =================== */
       .sidebar {
         position: sticky;
-        top: 13rem;
+        top: calc(var(--frozen-header-h, 235px) + 1.5rem);
         border-left: 1px solid var(--line);
         padding-left: 1.5rem;
+        max-height: calc(100vh - var(--frozen-header-h, 235px) - 2rem);
+        overflow-y: auto;
       }
 
       @media (max-width: 860px) {
@@ -72,6 +75,8 @@
           padding-left: 0;
           border-bottom: 1px solid var(--line);
           padding-bottom: 1.5rem;
+          max-height: none;
+          overflow-y: visible;
         }
       }
 
@@ -289,7 +294,14 @@
       /* =================== CONTENT =================== */
       article { padding-bottom: 6rem; }
 
-      section { margin-bottom: 3.5rem; }
+      section {
+        margin-bottom: 3.5rem;
+        scroll-margin-top: calc(var(--frozen-header-h, 235px) + 1.5rem);
+      }
+
+      [id] {
+        scroll-margin-top: calc(var(--frozen-header-h, 235px) + 1.5rem);
+      }
 
       /* Chapter marker */
       .ch {
@@ -1717,6 +1729,17 @@
       contactNavBtn.addEventListener('click', () => showContact());
       mainTitle.style.cursor = 'pointer';
       mainTitle.addEventListener('click', () => goHome());
+
+      function updateFrozenHeaderHeight() {
+        const header = document.querySelector('.frozen-header-wrapper');
+        if (header) {
+          const h = header.getBoundingClientRect().height;
+          document.documentElement.style.setProperty('--frozen-header-h', `${h}px`);
+        }
+      }
+      window.addEventListener('resize', updateFrozenHeaderHeight);
+      window.addEventListener('load', updateFrozenHeaderHeight);
+      updateFrozenHeaderHeight();
 
       document.querySelectorAll('.toc-contact-link').forEach(link => {
         link.addEventListener('click', (e) => {
