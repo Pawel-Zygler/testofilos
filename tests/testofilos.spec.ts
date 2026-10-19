@@ -21,6 +21,14 @@ test.describe('@smoke @e2e Philosophy of Testing - Language & Core Flow', () => 
     await expect(testofilos.enContent).toBeHidden();
   });
 
+  test('should display exactly two publication tabs', async () => {
+    await expect(testofilos.partTabs).toHaveCount(2);
+    await expect(testofilos.part1Btn).toBeVisible();
+    await expect(testofilos.part2Btn).toBeVisible();
+    await expect(testofilos.part1Btn).toHaveText('Filozofia testowania · Część pierwsza');
+    await expect(testofilos.part2Btn).toHaveText('Filozofia testowania · Część druga');
+  });
+
   test('should toggle between Part One and Part Two tabs', async () => {
     await expect(testofilos.part1Btn).toHaveText('Filozofia testowania · Część pierwsza');
     await expect(testofilos.part2Btn).toHaveText('Filozofia testowania · Część druga');

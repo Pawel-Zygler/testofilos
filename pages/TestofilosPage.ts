@@ -7,6 +7,8 @@ export class TestofilosPage {
   readonly plBtn: Locator;
   readonly enBtn: Locator;
   readonly uaBtn: Locator;
+  readonly partsNav: Locator;
+  readonly partTabs: Locator;
   readonly part1Btn: Locator;
   readonly part2Btn: Locator;
   readonly plContent: Locator;
@@ -34,6 +36,8 @@ export class TestofilosPage {
     this.uaBtn = page.locator('[data-testid="lang-switch-ua"], #ua-btn');
 
     // Parts tabs
+    this.partsNav = page.locator('[data-testid="parts-nav"], .parts-nav');
+    this.partTabs = page.locator('[data-testid="parts-nav"] button, .parts-nav .part-tab');
     this.part1Btn = page.locator('[data-testid="tab-part-1"], #part1-btn');
     this.part2Btn = page.locator('[data-testid="tab-part-2"], #part2-btn');
 
