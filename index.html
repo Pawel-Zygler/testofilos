@@ -56,7 +56,7 @@
       /* =================== SIDEBAR & TOC =================== */
       .sidebar {
         position: sticky;
-        top: 2rem;
+        top: 13rem;
         border-left: 1px solid var(--line);
         padding-left: 1.5rem;
       }
@@ -180,18 +180,32 @@
 
       .contact-block a:hover { border-color: var(--text); }
 
-      /* =================== HEADER =================== */
+      /* =================== FROZEN HEADER & TOP BAR =================== */
+      .frozen-header-wrapper {
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        background: var(--bg);
+        padding-top: 2rem;
+      }
+
       .site-header {
-        padding: 5rem 0 3rem;
-        border-bottom: 1px solid var(--line);
-        margin-bottom: 3rem;
+        padding: 0 0 1.25rem 0;
+        border-bottom: none;
+        margin-bottom: 0;
+      }
+
+      .top-bar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 1.5rem;
       }
 
       .lang-bar {
         display: flex;
         align-items: center;
         gap: 1.5rem;
-        margin-bottom: 2.5rem;
       }
 
       .lang-btn {
@@ -212,13 +226,35 @@
 
       .lang-sep { color: var(--line); font-size: 1rem; }
 
+      .nav-contact-btn {
+        background: none;
+        border: none;
+        font-family: 'DM Mono', monospace;
+        font-size: 0.72rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--text-dim);
+        cursor: pointer;
+        padding: 0;
+        transition: color 0.2s;
+      }
+
+      .nav-contact-btn:hover {
+        color: var(--text-secondary);
+      }
+
+      .nav-contact-btn.active {
+        color: var(--text);
+        font-weight: 500;
+      }
+
       .site-title {
         font-size: clamp(2rem, 5vw, 3rem);
         font-weight: 300;
         letter-spacing: -0.03em;
         color: var(--text);
         line-height: 1.15;
-        margin-bottom: 1rem;
+        margin-bottom: 0.75rem;
       }
 
       .site-subtitle {
@@ -460,23 +496,29 @@
   <body>
     <div class="page">
 
-      <header class="site-header" data-testid="site-header">
-        <div class="lang-bar" data-testid="lang-bar">
-          <button id="pl-btn" class="lang-btn active" data-testid="lang-switch-pl">PL</button>
-          <span class="lang-sep">/</span>
-          <button id="en-btn" class="lang-btn" data-testid="lang-switch-en">EN</button>
-          <span class="lang-sep">/</span>
-          <button id="ua-btn" class="lang-btn" data-testid="lang-switch-ua">UA</button>
-        </div>
-        <h1 class="site-title" id="main-title" data-testid="main-title">Filozofia Testowania</h1>
-        <p class="site-subtitle" id="main-subtitle" data-testid="main-subtitle">Próba naukowego podejścia do umiejętności testowania oprogramowania.</p>
-      </header>
+      <!-- ===== FROZEN HEADER ZONE (STICKY TO TOP) ===== -->
+      <div class="frozen-header-wrapper" data-testid="frozen-header-wrapper">
+        <header class="site-header" data-testid="site-header">
+          <div class="top-bar" data-testid="top-bar">
+            <div class="lang-bar" data-testid="lang-bar">
+              <button id="pl-btn" class="lang-btn active" data-testid="lang-switch-pl">PL</button>
+              <span class="lang-sep">/</span>
+              <button id="en-btn" class="lang-btn" data-testid="lang-switch-en">EN</button>
+              <span class="lang-sep">/</span>
+              <button id="ua-btn" class="lang-btn" data-testid="lang-switch-ua">UA</button>
+            </div>
+            <button id="contact-nav-btn" class="nav-contact-btn" data-testid="nav-contact-btn">Kontakt</button>
+          </div>
+          <h1 class="site-title" id="main-title" data-testid="main-title">Filozofia Testowania</h1>
+          <p class="site-subtitle" id="main-subtitle" data-testid="main-subtitle">Próba naukowego podejścia do umiejętności testowania oprogramowania.</p>
+        </header>
 
-      <!-- ===== PARTS TABS NAVIGATION ===== -->
-      <nav class="parts-nav" data-testid="parts-nav" aria-label="Części artykułu">
-        <button id="part1-btn" class="part-tab active" data-testid="tab-part-1">Filozofia testowania · Część pierwsza</button>
-        <button id="part2-btn" class="part-tab" data-testid="tab-part-2">Filozofia testowania · Część druga</button>
-      </nav>
+        <!-- ===== PARTS TABS NAVIGATION (LAST FROZEN PART) ===== -->
+        <nav class="parts-nav" data-testid="parts-nav" aria-label="Części artykułu">
+          <button id="part1-btn" class="part-tab active" data-testid="tab-part-1">Filozofia testowania · Część pierwsza</button>
+          <button id="part2-btn" class="part-tab" data-testid="tab-part-2">Filozofia testowania · Część druga</button>
+        </nav>
+      </div><!-- end frozen-header-wrapper -->
 
 
       <!-- ===== POLISH ===== -->
@@ -818,17 +860,7 @@
             <div class="fn-entry" id="fn:6">6. <strong>"Testing vs. Checking"</strong> — Michael Bolton. <a href="https://developsense.com/blog/2009/08/testing-vs-checking" target="_blank">developsense.com</a> — rozróżnienie między testowaniem a weryfikacją, źródło pojęcia testowania jako inspekcji. <a href="#fnref:6">↑</a></div>
           </section>
 
-          <hr/>
 
-          <!-- KONTAKT -->
-          <section id="pl-contact" data-testid="section-pl-contact">
-            <h2>Kontakt</h2>
-            <p>Pytania, uwagi i komentarze dotyczące treści artykułu są mile widziane.</p>
-            <div class="contact-block">
-              <a href="mailto:pawel.zygler@gmail.com" data-testid="contact-email">pawel.zygler@gmail.com</a>
-              <a href="mailto:zygler.pawel@protonmail.com">zygler.pawel@protonmail.com</a>
-            </div>
-          </section>
 
         </article>
         
@@ -850,7 +882,7 @@
               <li><a href="#pl-summary"><span class="toc-num">11</span>Streszczenie</a></li>
               <li><a href="#pl-laws"><span class="toc-num">12</span>Ustalenia</a></li>
               <li><a href="#pl-sources"><span class="toc-num">13</span>Źródła</a></li>
-              <li><a href="#pl-contact"><span class="toc-num">14</span>Kontakt</a></li>
+              <li><a href="#contact" class="toc-contact-link"><span class="toc-num">14</span>Kontakt</a></li>
             </ul>
           </nav>
         </aside>
@@ -1044,17 +1076,7 @@
             <div class="fn-entry" id="fn:en-6">6. <strong>"Testing vs. Checking"</strong> — Michael Bolton. <a href="https://developsense.com/blog/2009/08/testing-vs-checking" target="_blank">developsense.com</a> — distinction between testing and verification; source of the concept of testing as inspection. <a href="#fnref:en-6">↑</a></div>
           </section>
 
-          <hr/>
 
-          <!-- CONTACT -->
-          <section id="en-contact" data-testid="section-en-contact">
-            <h2>Contact</h2>
-            <p>Questions, remarks, and comments regarding the content of this article are welcome.</p>
-            <div class="contact-block">
-              <a href="mailto:pawel.zygler@gmail.com" data-testid="contact-email">pawel.zygler@gmail.com</a>
-              <a href="mailto:zygler.pawel@protonmail.com">zygler.pawel@protonmail.com</a>
-            </div>
-          </section>
 
         </article>
         
@@ -1076,7 +1098,7 @@
               <li><a href="#en-summary"><span class="toc-num">11</span>Summary</a></li>
               <li><a href="#en-laws"><span class="toc-num">12</span>Findings</a></li>
               <li><a href="#en-sources"><span class="toc-num">13</span>Sources</a></li>
-              <li><a href="#en-contact"><span class="toc-num">14</span>Contact</a></li>
+              <li><a href="#contact" class="toc-contact-link"><span class="toc-num">14</span>Contact</a></li>
             </ul>
           </nav>
         </aside>
@@ -1421,17 +1443,7 @@
             <div class="fn-entry" id="fn:ua-6">6. <strong>«Testing vs. Checking»</strong> — Майкл Болтон (Michael Bolton). <a href="https://developsense.com/blog/2009/08/testing-vs-checking" target="_blank">developsense.com</a> — розмежування між тестуванням і верифікацією (перевіркою), джерело поняття тестування як інспекції. <a href="#fnref:ua-6">↑</a></div>
           </section>
 
-          <hr/>
 
-          <!-- КОНТАКТИ -->
-          <section id="ua-contact" data-testid="section-ua-contact">
-            <h2>Контакти</h2>
-            <p>Запитання, зауваження та коментарі щодо змісту статті щиро вітаються.</p>
-            <div class="contact-block">
-              <a href="mailto:pawel.zygler@gmail.com" data-testid="contact-email">pawel.zygler@gmail.com</a>
-              <a href="mailto:zygler.pawel@protonmail.com">zygler.pawel@protonmail.com</a>
-            </div>
-          </section>
 
         </article>
         
@@ -1453,7 +1465,7 @@
               <li><a href="#ua-summary"><span class="toc-num">11</span>Підсумок</a></li>
               <li><a href="#ua-laws"><span class="toc-num">12</span>Положення</a></li>
               <li><a href="#ua-sources"><span class="toc-num">13</span>Джерела</a></li>
-              <li><a href="#ua-contact"><span class="toc-num">14</span>Контакти</a></li>
+              <li><a href="#contact" class="toc-contact-link"><span class="toc-num">14</span>Контакти</a></li>
             </ul>
           </nav>
         </aside>
@@ -1471,6 +1483,41 @@
         </article>
       </div>
 
+      <!-- ===== CONTACT PAGE ===== -->
+      <div id="contact-content" class="content-grid hidden" data-testid="content-contact">
+        <article>
+          <!-- Polish Contact -->
+          <section id="pl-contact" data-testid="section-pl-contact">
+            <h2>Kontakt</h2>
+            <p>Pytania, uwagi i komentarze dotyczące treści artykułu są mile widziane.</p>
+            <div class="contact-block">
+              <a href="mailto:pawel.zygler@gmail.com" data-testid="contact-email">pawel.zygler@gmail.com</a>
+              <a href="mailto:zygler.pawel@protonmail.com">zygler.pawel@protonmail.com</a>
+            </div>
+          </section>
+
+          <!-- English Contact -->
+          <section id="en-contact" data-testid="section-en-contact" class="hidden">
+            <h2>Contact</h2>
+            <p>Questions, remarks, and comments regarding the content of this article are welcome.</p>
+            <div class="contact-block">
+              <a href="mailto:pawel.zygler@gmail.com" data-testid="contact-email">pawel.zygler@gmail.com</a>
+              <a href="mailto:zygler.pawel@protonmail.com">zygler.pawel@protonmail.com</a>
+            </div>
+          </section>
+
+          <!-- Ukrainian Contact -->
+          <section id="ua-contact" data-testid="section-ua-contact" class="hidden">
+            <h2>Контакти</h2>
+            <p>Запитання, зауваження та коментарі щодо змісту статті щиро вітаються.</p>
+            <div class="contact-block">
+              <a href="mailto:pawel.zygler@gmail.com" data-testid="contact-email">pawel.zygler@gmail.com</a>
+              <a href="mailto:zygler.pawel@protonmail.com">zygler.pawel@protonmail.com</a>
+            </div>
+          </section>
+        </article>
+      </div><!-- end contact-content -->
+
       <footer class="site-footer" data-testid="site-footer">
         <p id="footer-text" data-testid="footer-text">&copy; 2026 Filozofia Testowania</p>
       </footer>
@@ -1479,14 +1526,23 @@
 
     <script>
       let currentPart = 1;
+      let currentView = 'part1'; // 'part1' | 'part2' | 'contact'
       let currentLang = 'pl';
 
       const plBtn = document.getElementById('pl-btn');
       const enBtn = document.getElementById('en-btn');
       const uaBtn = document.getElementById('ua-btn');
+      const contactNavBtn = document.getElementById('contact-nav-btn');
+
       const plContent = document.getElementById('pl-content');
       const enContent = document.getElementById('en-content');
       const uaContent = document.getElementById('ua-content');
+      const part2Content = document.getElementById('part2-content');
+      const contactContent = document.getElementById('contact-content');
+      const plContact = document.getElementById('pl-contact');
+      const enContact = document.getElementById('en-contact');
+      const uaContact = document.getElementById('ua-contact');
+
       const mainTitle = document.getElementById('main-title');
       const mainSubtitle = document.getElementById('main-subtitle');
       const docTitle = document.querySelector('title');
@@ -1494,7 +1550,6 @@
 
       const part1Btn = document.getElementById('part1-btn');
       const part2Btn = document.getElementById('part2-btn');
-      const part2Content = document.getElementById('part2-content');
       const part2Title = document.getElementById('part2-title');
       const part2Desc = document.getElementById('part2-desc');
 
@@ -1512,6 +1567,12 @@
         pl: 'Część druga jest w przygotowaniu.',
         en: 'Part Two is in preparation.',
         uk: 'Частина друга в процесі підготовки.'
+      };
+
+      const contactNavTitles = {
+        pl: 'Kontakt',
+        en: 'Contact',
+        uk: 'Контакти'
       };
 
       const titles = {
@@ -1535,21 +1596,54 @@
         uk: '&copy; 2026 Філософія тестування'
       };
 
-      function setPart(part) {
-        currentPart = part;
-        if (part === 1) {
-          part1Btn.classList.add('active');
-          part2Btn.classList.remove('active');
-          part2Content.classList.add('hidden');
-          setLanguage(currentLang);
-        } else {
-          part2Btn.classList.add('active');
+      function updateViews() {
+        if (currentView === 'contact') {
+          contactNavBtn.classList.add('active');
           part1Btn.classList.remove('active');
+          part2Btn.classList.remove('active');
+
           plContent.classList.add('hidden');
           enContent.classList.add('hidden');
           uaContent.classList.add('hidden');
+          part2Content.classList.add('hidden');
+          contactContent.classList.remove('hidden');
+
+          plContact.classList.toggle('hidden', currentLang !== 'pl');
+          enContact.classList.toggle('hidden', currentLang !== 'en');
+          uaContact.classList.toggle('hidden', currentLang !== 'uk');
+        } else if (currentView === 'part2') {
+          contactNavBtn.classList.remove('active');
+          part1Btn.classList.remove('active');
+          part2Btn.classList.add('active');
+
+          plContent.classList.add('hidden');
+          enContent.classList.add('hidden');
+          uaContent.classList.add('hidden');
+          contactContent.classList.add('hidden');
           part2Content.classList.remove('hidden');
+        } else {
+          // part1
+          contactNavBtn.classList.remove('active');
+          part1Btn.classList.add('active');
+          part2Btn.classList.remove('active');
+
+          contactContent.classList.add('hidden');
+          part2Content.classList.add('hidden');
+          plContent.classList.toggle('hidden', currentLang !== 'pl');
+          enContent.classList.toggle('hidden', currentLang !== 'en');
+          uaContent.classList.toggle('hidden', currentLang !== 'uk');
         }
+      }
+
+      function setPart(part) {
+        currentPart = part;
+        currentView = part === 1 ? 'part1' : 'part2';
+        updateViews();
+      }
+
+      function showContact() {
+        currentView = 'contact';
+        updateViews();
       }
 
       function setLanguage(lang) {
@@ -1557,17 +1651,7 @@
         currentLang = normalized;
         document.documentElement.lang = normalized;
 
-        if (currentPart === 1) {
-          plContent.classList.toggle('hidden', normalized !== 'pl');
-          enContent.classList.toggle('hidden', normalized !== 'en');
-          uaContent.classList.toggle('hidden', normalized !== 'uk');
-          part2Content.classList.add('hidden');
-        } else {
-          plContent.classList.add('hidden');
-          enContent.classList.add('hidden');
-          uaContent.classList.add('hidden');
-          part2Content.classList.remove('hidden');
-        }
+        updateViews();
 
         plBtn.classList.toggle('active', normalized === 'pl');
         enBtn.classList.toggle('active', normalized === 'en');
@@ -1584,6 +1668,7 @@
         part2Btn.textContent = part2Titles[normalized];
         if (part2Title) part2Title.textContent = part2Titles[normalized];
         if (part2Desc) part2Desc.textContent = part2Descriptions[normalized];
+        if (contactNavBtn) contactNavBtn.textContent = contactNavTitles[normalized];
       }
 
       plBtn.addEventListener('click', () => setLanguage('pl'));
@@ -1592,6 +1677,15 @@
 
       part1Btn.addEventListener('click', () => setPart(1));
       part2Btn.addEventListener('click', () => setPart(2));
+      contactNavBtn.addEventListener('click', () => showContact());
+
+      document.querySelectorAll('.toc-contact-link').forEach(link => {
+        link.addEventListener('click', (e) => {
+          e.preventDefault();
+          showContact();
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+      });
 
       const urlParams = new URLSearchParams(window.location.search);
       const urlLang = urlParams.get('lang');

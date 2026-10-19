@@ -21,6 +21,28 @@ test.describe('@smoke @e2e Philosophy of Testing - Language & Core Flow', () => 
     await expect(testofilos.enContent).toBeHidden();
   });
 
+  test('should display frozen header sticky to the top', async () => {
+    await expect(testofilos.frozenHeader).toBeVisible();
+    const position = await testofilos.frozenHeader.evaluate(el => window.getComputedStyle(el).position);
+    expect(position).toBe('sticky');
+  });
+
+  test('should display Contact page button in the top row and navigate to Contact', async () => {
+    await expect(testofilos.contactNavBtn).toBeVisible();
+    await expect(testofilos.contactNavBtn).toHaveText('Kontakt');
+
+    // Click Contact button to open Contact page
+    await testofilos.switchToContact();
+    await expect(testofilos.contactContent).toBeVisible();
+    await expect(testofilos.plContent).toBeHidden();
+    await expect(testofilos.contactEmail.first()).toBeVisible();
+
+    // Switch back to Part 1
+    await testofilos.switchToPart(1);
+    await expect(testofilos.contactContent).toBeHidden();
+    await expect(testofilos.plContent).toBeVisible();
+  });
+
   test('should display exactly two publication tabs', async () => {
     await expect(testofilos.partTabs).toHaveCount(2);
     await expect(testofilos.part1Btn).toBeVisible();
@@ -61,6 +83,9 @@ test.describe('@smoke @e2e Philosophy of Testing - Language & Core Flow', () => 
     // Verify tabs translate to English
     await expect(testofilos.part1Btn).toHaveText('Philosophy of Testing · Part One');
     await expect(testofilos.part2Btn).toHaveText('Philosophy of Testing · Part Two');
+
+    // Verify Contact button translates to English
+    await expect(testofilos.contactNavBtn).toHaveText('Contact');
   });
 
   test('should allow switching back to Polish (PL)', async ({ page }) => {

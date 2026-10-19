@@ -2,11 +2,14 @@ import { Page, Locator, expect } from '@playwright/test';
 
 export class TestofilosPage {
   readonly page: Page;
+  readonly frozenHeader: Locator;
+  readonly topBar: Locator;
   readonly mainTitle: Locator;
   readonly mainSubtitle: Locator;
   readonly plBtn: Locator;
   readonly enBtn: Locator;
   readonly uaBtn: Locator;
+  readonly contactNavBtn: Locator;
   readonly partsNav: Locator;
   readonly partTabs: Locator;
   readonly part1Btn: Locator;
@@ -17,6 +20,10 @@ export class TestofilosPage {
   readonly part2Content: Locator;
   readonly part2Title: Locator;
   readonly part2Desc: Locator;
+  readonly contactContent: Locator;
+  readonly plContact: Locator;
+  readonly enContact: Locator;
+  readonly uaContact: Locator;
   readonly plToc: Locator;
   readonly enToc: Locator;
   readonly uaToc: Locator;
@@ -29,11 +36,14 @@ export class TestofilosPage {
 
   constructor(page: Page) {
     this.page = page;
+    this.frozenHeader = page.locator('[data-testid="frozen-header-wrapper"], .frozen-header-wrapper');
+    this.topBar = page.locator('[data-testid="top-bar"], .top-bar');
     this.mainTitle = page.locator('[data-testid="main-title"], #main-title');
     this.mainSubtitle = page.locator('[data-testid="main-subtitle"], #main-subtitle');
     this.plBtn = page.locator('[data-testid="lang-switch-pl"], #pl-btn');
     this.enBtn = page.locator('[data-testid="lang-switch-en"], #en-btn');
     this.uaBtn = page.locator('[data-testid="lang-switch-ua"], #ua-btn');
+    this.contactNavBtn = page.locator('[data-testid="nav-contact-btn"], #contact-nav-btn');
 
     // Parts tabs
     this.partsNav = page.locator('[data-testid="parts-nav"], .parts-nav');
@@ -48,6 +58,10 @@ export class TestofilosPage {
     this.part2Content = page.locator('[data-testid="content-part2"], #part2-content');
     this.part2Title = page.locator('#part2-title');
     this.part2Desc = page.locator('#part2-desc');
+    this.contactContent = page.locator('[data-testid="content-contact"], #contact-content');
+    this.plContact = page.locator('[data-testid="section-pl-contact"], #pl-contact');
+    this.enContact = page.locator('[data-testid="section-en-contact"], #en-contact');
+    this.uaContact = page.locator('[data-testid="section-ua-contact"], #ua-contact');
 
     this.plToc = page.locator('[data-testid="toc-pl"], nav.toc[aria-label="Spis treści"]');
     this.enToc = page.locator('[data-testid="toc-en"], nav.toc[aria-label="Table of Contents"]');
@@ -95,6 +109,12 @@ export class TestofilosPage {
       await expect(this.part2Btn).toHaveClass(/active/);
       await expect(this.part2Content).not.toHaveClass(/hidden/);
     }
+  }
+
+  async switchToContact() {
+    await this.contactNavBtn.click();
+    await expect(this.contactNavBtn).toHaveClass(/active/);
+    await expect(this.contactContent).toBeVisible();
   }
 
   async getTocItems(lang: 'pl' | 'en' | 'ua'): Promise<string[]> {

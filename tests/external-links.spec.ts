@@ -23,12 +23,12 @@ test.describe('@links @api Philosophy of Testing - External Links & Network Inte
       // Validate that external links use secure HTTPS protocol
       expect(url).toMatch(/^https:\/\//);
 
-      // Perform fast HTTP HEAD/GET request to ensure no dead 404 links
+      // Perform fast HTTP request to ensure no dead 404 links
       const response = await request.get(url, {
         headers: {
           'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36'
         },
-        timeout: 10000,
+        timeout: 20000,
         failOnStatusCode: false
       });
 
