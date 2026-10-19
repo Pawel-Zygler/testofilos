@@ -410,23 +410,23 @@
   <body>
     <div class="page">
 
-      <header class="site-header">
-        <div class="lang-bar">
-          <button id="pl-btn" class="lang-btn active">PL</button>
+      <header class="site-header" data-testid="site-header">
+        <div class="lang-bar" data-testid="lang-bar">
+          <button id="pl-btn" class="lang-btn active" data-testid="lang-switch-pl">PL</button>
           <span class="lang-sep">/</span>
-          <button id="en-btn" class="lang-btn">EN</button>
+          <button id="en-btn" class="lang-btn" data-testid="lang-switch-en">EN</button>
           <span class="lang-sep">/</span>
-          <button id="ua-btn" class="lang-btn">UA</button>
+          <button id="ua-btn" class="lang-btn" data-testid="lang-switch-ua">UA</button>
         </div>
-        <h1 class="site-title" id="main-title">Filozofia<br/>Testowania</h1>
-        <p class="site-subtitle" id="main-subtitle">Próba naukowego podejścia do umiejętności testowania oprogramowania.</p>
+        <h1 class="site-title" id="main-title" data-testid="main-title">Filozofia<br/>Testowania</h1>
+        <p class="site-subtitle" id="main-subtitle" data-testid="main-subtitle">Próba naukowego podejścia do umiejętności testowania oprogramowania.</p>
       </header>
 
       <!-- ===== POLISH ===== -->
-      <div id="pl-content" class="content-grid">
+      <div id="pl-content" class="content-grid" data-testid="content-pl">
         <article>
 
-          <section id="pl-intro">
+          <section id="pl-intro" data-testid="section-pl-intro">
             <h2>Wstęp</h2>
             <h3>Czym jest filozofia?</h3>
             <p>
@@ -458,7 +458,7 @@
             </p>
           </section>
 
-          <section id="pl-why">
+          <section id="pl-why" data-testid="section-pl-why">
             <h2>Filozofia testowania · Część pierwsza</h2>
             <h3>Dlaczego istnieje potrzeba zatrudniania testerów?</h3>
             <p>
@@ -476,7 +476,7 @@
             </p>
           </section>
 
-          <section id="pl-software">
+          <section id="pl-software" data-testid="section-pl-software">
             <h3>Czym jest oprogramowanie?</h3>
             <p>
               Najszerzej rozumiane, oprogramowanie to zestaw programów wydających
@@ -514,7 +514,7 @@
             </p>
           </section>
 
-          <section id="pl-bug">
+          <section id="pl-bug" data-testid="section-pl-bug">
             <h3>Co to jest błąd?</h3>
             <p>
               W dalszym rozwoju pracy należałoby zdefiniować co to jest błąd? Jest to
@@ -532,7 +532,7 @@
             </p>
           </section>
 
-          <section id="pl-consequences">
+          <section id="pl-consequences" data-testid="section-pl-consequences">
             <h3>Jakie są następstwa istnienia błędów?</h3>
             <p>
               Jakie są konsekwencje istnienia błędów w oprogramowaniu? W takiej sytuacji
@@ -549,7 +549,7 @@
             </p>
           </section>
 
-          <section id="pl-test">
+          <section id="pl-test" data-testid="section-pl-test">
             <h3>Co to jest test?</h3>
             <p>
               Co musi zawierać w sobie test, aby test był testem? Musi coś asercjonować.
@@ -579,7 +579,7 @@
             </div>
           </section>
 
-          <section id="pl-types">
+          <section id="pl-types" data-testid="section-pl-types">
             <h3>Jakie główne typy testów wyróżniamy?</h3>
             <p>
               E2E zakłada że wszystkie systemy są włączone i działają, taki test swoje
@@ -601,7 +601,7 @@
             </p>
           </section>
 
-          <section id="pl-coverage">
+          <section id="pl-coverage" data-testid="section-pl-coverage">
             <h3>Czy pokrycie wszystkich przypadków użycia jest możliwe?</h3>
             <p>
               Co powinien zawierać w sobie test by otrzymać prawdziwe rezultaty o
@@ -640,7 +640,7 @@
             </div>
           </section>
 
-          <section id="pl-select">
+          <section id="pl-select" data-testid="section-pl-select">
             <h3>Jak dobrać testy pod SUT?</h3>
             <p>
               Czy dobór zestawu testów to wszystko co stanowi o sukcesie uzyskanych
@@ -658,7 +658,7 @@
             </p>
           </section>
 
-          <section id="pl-quality">
+          <section id="pl-quality" data-testid="section-pl-quality">
             <h3>Kiedy oprogramowanie jest wysokiej jakości?</h3>
             <p>
               Powróćmy do kwestii niskiej bądź wysokiej jakości. Kiedy uznać że
@@ -701,7 +701,7 @@
             </p>
           </section>
 
-          <section id="pl-summary">
+          <section id="pl-summary" data-testid="section-pl-summary">
             <h2>Streszczenie</h2>
             <p>
               Filozofia testowania stawia pytania o najdalsze przyczyny w dziedzinie
@@ -720,7 +720,7 @@
           <hr/>
 
           <!-- PRAWA / USTALENIA -->
-          <section id="pl-laws">
+          <section id="pl-laws" data-testid="section-pl-laws">
             <h2>Ustalenia</h2>
             <ul class="laws-list">
               <li>
@@ -750,7 +750,7 @@
           <hr/>
 
           <!-- ŹRÓDŁA -->
-          <section id="pl-sources">
+          <section id="pl-sources" data-testid="section-pl-sources">
             <h2>Źródła i rodła</h2>
             <p style="font-size:0.82rem;color:var(--text-dim);margin-bottom:1.25rem;">Publikacje i standardy, na których opiera się niniejsza praca.</p>
 
@@ -765,11 +765,11 @@
           <hr/>
 
           <!-- KONTAKT -->
-          <section id="pl-contact">
+          <section id="pl-contact" data-testid="section-pl-contact">
             <h2>Kontakt</h2>
             <p>Pytania, uwagi i komentarze dotyczące treści artykułu są mile widziane.</p>
             <div class="contact-block">
-              <a href="mailto:pawel.zygler@gmail.com">pawel.zygler@gmail.com</a>
+              <a href="mailto:pawel.zygler@gmail.com" data-testid="contact-email">pawel.zygler@gmail.com</a>
               <a href="mailto:zygler.pawel@protonmail.com">zygler.pawel@protonmail.com</a>
             </div>
           </section>
@@ -778,7 +778,7 @@
         
         <aside class="sidebar">
           <!-- TOC -->
-          <nav class="toc" aria-label="Spis treści">
+          <nav class="toc" aria-label="Spis treści" data-testid="toc-pl">
             <span class="toc-label">Spis treści</span>
             <ul class="toc-list">
               <li><a href="#pl-intro"><span class="toc-num">01</span>Czym jest filozofia?</a></li>
@@ -801,10 +801,10 @@
       </div><!-- end pl-content -->
 
       <!-- ===== ENGLISH ===== -->
-      <div id="en-content" class="content-grid hidden">
+      <div id="en-content" class="content-grid hidden" data-testid="content-en">
         <article>
 
-          <section id="en-intro">
+          <section id="en-intro" data-testid="section-en-intro">
             <h2>Introduction</h2>
             <h3>What is Philosophy?</h3>
             <p>
@@ -829,7 +829,7 @@
             </p>
           </section>
 
-          <section id="en-why">
+          <section id="en-why" data-testid="section-en-why">
             <h2>Philosophy of Testing · Part One</h2>
             <h3>Why Is There a Need to Hire Testers?</h3>
             <p>
@@ -838,7 +838,7 @@
             </p>
           </section>
 
-          <section id="en-software">
+          <section id="en-software" data-testid="section-en-software">
             <h3>What is Software?</h3>
             <p>
               Broadly defined, software is a collection of programs that issue instructions to a computer. It can be divided into operating systems (managing hardware and providing services) and application software (performing specific tasks for users). Software always has an expected behavior defined before it is created.
@@ -851,7 +851,7 @@
             </p>
           </section>
 
-          <section id="en-bug">
+          <section id="en-bug" data-testid="section-en-bug">
             <h3>What is a Bug?</h3>
             <p>
               A bug is a deviation of software behavior from its requirements. The existence of a bug implies that software has a defined intended behavior.
@@ -861,14 +861,14 @@
             </p>
           </section>
 
-          <section id="en-consequences">
+          <section id="en-consequences" data-testid="section-en-consequences">
             <h3>What Are the Consequences of Bugs?</h3>
             <p>
               When bugs exist, software does not meet expectations; hence, bugs must be eliminated for it to function properly. Another consequence is that bugs trigger the need to fix the system and subsequently verify the effectiveness of fixes. Detecting deviations is the responsibility of executed tests.
             </p>
           </section>
 
-          <section id="en-test">
+          <section id="en-test" data-testid="section-en-test">
             <h3>What is a Test?</h3>
             <p>
               What must a test contain in order to be a test? It must make an assertion. Every test must yield a result of true, false, or unknown. Otherwise, we cannot validate behavior<sup id="fnref:en-5"><a href="#fn:en-5">5</a></sup>.
@@ -882,7 +882,7 @@
             </div>
           </section>
 
-          <section id="en-types">
+          <section id="en-types" data-testid="section-en-types">
             <h3>What Are the Main Types of Tests?</h3>
             <p>
               E2E assumes all systems are on and working; such a test draws its boundaries the furthest, allowing testing of complete system logic. Integration tests check how two or more system components behave together. A unit or component test is the most restrictive in what it checks. It isolates a single component to check its behavior.
@@ -893,7 +893,7 @@
             </div>
           </section>
 
-          <section id="en-coverage">
+          <section id="en-coverage" data-testid="section-en-coverage">
             <h3>Is Covering All Use Cases Possible?</h3>
             <p>
               Is full test coverage of all use cases possible? Then we would have perfect knowledge. The answer is no — a fuel-purchasing app in 18 countries with billions of permutations illustrates the impossibility of exhaustive testing.
@@ -907,7 +907,7 @@
             </div>
           </section>
 
-          <section id="en-select">
+          <section id="en-select" data-testid="section-en-select">
             <h3>How to Select Tests for a SUT?</h3>
             <p>
               Success depends on several factors: Thorough analysis of requirements and the actual state of the SUT. Correct configuration of the environment and data. Proper execution of tests. Accurate collection of results. Effective communication of results to stakeholders.
@@ -917,7 +917,7 @@
             </p>
           </section>
 
-          <section id="en-quality">
+          <section id="en-quality" data-testid="section-en-quality">
             <h3>When is Software High Quality?</h3>
             <p>
               Let us distinguish between internal quality (before release) and external quality (after release), according to ISO/IEC 25010<sup id="fnref:en-3"><a href="#fn:en-3">3</a></sup>.
@@ -937,7 +937,7 @@
             </div>
           </section>
 
-          <section id="en-summary">
+          <section id="en-summary" data-testid="section-en-summary">
             <h2>Summary</h2>
             <p>
               The philosophy of testing asks ultimate questions: What is a bug? What is the purpose of testing? Software exists to help people; Testing exists to deliver reliable information about software. Bugs are deviations from requirements. Tests must assert (true/false/unknown), each with limits defined by type and maturity. Testing of complex systems cannot achieve complete coverage. Quality is internal (requirements + acceptable risk) and external (user expectations), and testing only observes it. Testing is not quality assurance but quality discovery.
@@ -947,7 +947,7 @@
           <hr/>
 
           <!-- FINDINGS -->
-          <section id="en-laws">
+          <section id="en-laws" data-testid="section-en-laws">
             <h2>Findings</h2>
             <ul class="laws-list">
               <li>
@@ -977,7 +977,7 @@
           <hr/>
 
           <!-- SOURCES -->
-          <section id="en-sources">
+          <section id="en-sources" data-testid="section-en-sources">
             <h2>Sources</h2>
             <p style="font-size:0.82rem;color:var(--text-dim);margin-bottom:1.25rem;">Publications and standards that inform this work.</p>
 
@@ -992,11 +992,11 @@
           <hr/>
 
           <!-- CONTACT -->
-          <section id="en-contact">
+          <section id="en-contact" data-testid="section-en-contact">
             <h2>Contact</h2>
             <p>Questions, remarks, and comments regarding the content of this article are welcome.</p>
             <div class="contact-block">
-              <a href="mailto:pawel.zygler@gmail.com">pawel.zygler@gmail.com</a>
+              <a href="mailto:pawel.zygler@gmail.com" data-testid="contact-email">pawel.zygler@gmail.com</a>
               <a href="mailto:zygler.pawel@protonmail.com">zygler.pawel@protonmail.com</a>
             </div>
           </section>
@@ -1005,7 +1005,7 @@
         
         <aside class="sidebar">
           <!-- TOC -->
-          <nav class="toc" aria-label="Table of Contents">
+          <nav class="toc" aria-label="Table of Contents" data-testid="toc-en">
             <span class="toc-label">Table of Contents</span>
             <ul class="toc-list">
               <li><a href="#en-intro"><span class="toc-num">01</span>What is Philosophy?</a></li>
@@ -1028,10 +1028,10 @@
       </div><!-- end en-content -->
 
       <!-- ===== UKRAINIAN ===== -->
-      <div id="ua-content" class="content-grid hidden">
+      <div id="ua-content" class="content-grid hidden" data-testid="content-ua">
         <article>
 
-          <section id="ua-intro">
+          <section id="ua-intro" data-testid="section-ua-intro">
             <h2>Вступ</h2>
             <h3>Що таке філософія?</h3>
             <p>
@@ -1063,7 +1063,7 @@
             </p>
           </section>
 
-          <section id="ua-why">
+          <section id="ua-why" data-testid="section-ua-why">
             <h2>Філософія тестування · Частина перша</h2>
             <h3>Чому існує потреба наймати тестувальників?</h3>
             <p>
@@ -1081,7 +1081,7 @@
             </p>
           </section>
 
-          <section id="ua-software">
+          <section id="ua-software" data-testid="section-ua-software">
             <h3>Що таке програмне забезпечення?</h3>
             <p>
               У найширшому розумінні програмне забезпечення — це набір програм, що віддають
@@ -1119,7 +1119,7 @@
             </p>
           </section>
 
-          <section id="ua-bug">
+          <section id="ua-bug" data-testid="section-ua-bug">
             <h3>Що таке дефект (помилка)?</h3>
             <p>
               У подальшому розвитку праці слід дати визначення: що таке дефект? Це
@@ -1137,7 +1137,7 @@
             </p>
           </section>
 
-          <section id="ua-consequences">
+          <section id="ua-consequences" data-testid="section-ua-consequences">
             <h3>Які наслідки існування помилок?</h3>
             <p>
               Які наслідки наявності дефектів у програмному забезпеченні? У такій ситуації
@@ -1154,7 +1154,7 @@
             </p>
           </section>
 
-          <section id="ua-test">
+          <section id="ua-test" data-testid="section-ua-test">
             <h3>Що таке тест?</h3>
             <p>
               Що повинен містити в собі тест, аби тест був тестом? Він повинен щось стверджувати (містити асерцію).
@@ -1184,7 +1184,7 @@
             </div>
           </section>
 
-          <section id="ua-types">
+          <section id="ua-types" data-testid="section-ua-types">
             <h3>Які основні типи тестів ми виділяємо?</h3>
             <p>
               E2E передбачає, що всі системи ввімкнені та працюють; такий тест окреслює свої
@@ -1206,7 +1206,7 @@
             </p>
           </section>
 
-          <section id="ua-coverage">
+          <section id="ua-coverage" data-testid="section-ua-coverage">
             <h3>Чи можливе покриття всіх сценаріїв використання?</h3>
             <p>
               Що повинен містити в собі тест, щоб отримати справжні результати про
@@ -1245,7 +1245,7 @@
             </div>
           </section>
 
-          <section id="ua-select">
+          <section id="ua-select" data-testid="section-ua-select">
             <h3>Як підібрати тести для SUT?</h3>
             <p>
               Чи підбір набору тестів — це все, що визначає успіх отриманої
@@ -1263,7 +1263,7 @@
             </p>
           </section>
 
-          <section id="ua-quality">
+          <section id="ua-quality" data-testid="section-ua-quality">
             <h3>Коли програмне забезпечення є високоякісним?</h3>
             <p>
               Повернімося до питання низької або високої якості. Коли вважати, що
@@ -1306,7 +1306,7 @@
             </p>
           </section>
 
-          <section id="ua-summary">
+          <section id="ua-summary" data-testid="section-ua-summary">
             <h2>Підсумок</h2>
             <p>
               Філософія тестування ставить питання про першопричини в царині
@@ -1325,7 +1325,7 @@
           <hr/>
 
           <!-- ПОЛОЖЕННЯ -->
-          <section id="ua-laws">
+          <section id="ua-laws" data-testid="section-ua-laws">
             <h2>Положення</h2>
             <ul class="laws-list">
               <li>
@@ -1355,7 +1355,7 @@
           <hr/>
 
           <!-- ДЖЕРЕЛА -->
-          <section id="ua-sources">
+          <section id="ua-sources" data-testid="section-ua-sources">
             <h2>Джерела</h2>
             <p style="font-size:0.82rem;color:var(--text-dim);margin-bottom:1.25rem;">Публікації та стандарти, на яких ґрунтується ця праця.</p>
 
@@ -1370,11 +1370,11 @@
           <hr/>
 
           <!-- КОНТАКТИ -->
-          <section id="ua-contact">
+          <section id="ua-contact" data-testid="section-ua-contact">
             <h2>Контакти</h2>
             <p>Запитання, зауваження та коментарі щодо змісту статті щиро вітаються.</p>
             <div class="contact-block">
-              <a href="mailto:pawel.zygler@gmail.com">pawel.zygler@gmail.com</a>
+              <a href="mailto:pawel.zygler@gmail.com" data-testid="contact-email">pawel.zygler@gmail.com</a>
               <a href="mailto:zygler.pawel@protonmail.com">zygler.pawel@protonmail.com</a>
             </div>
           </section>
@@ -1383,7 +1383,7 @@
         
         <aside class="sidebar">
           <!-- TOC -->
-          <nav class="toc" aria-label="Зміст">
+          <nav class="toc" aria-label="Зміст" data-testid="toc-ua">
             <span class="toc-label">Зміст</span>
             <ul class="toc-list">
               <li><a href="#ua-intro"><span class="toc-num">01</span>Що таке філософія?</a></li>
@@ -1405,8 +1405,8 @@
         </aside>
       </div><!-- end ua-content -->
 
-      <footer class="site-footer">
-        <p id="footer-text">&copy; 2025 Filozofia Testowania</p>
+      <footer class="site-footer" data-testid="site-footer">
+        <p id="footer-text" data-testid="footer-text">&copy; 2025 Filozofia Testowania</p>
       </footer>
 
     </div><!-- end page -->
