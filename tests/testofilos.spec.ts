@@ -14,6 +14,11 @@ test.describe('@smoke @e2e Philosophy of Testing - Language & Core Flow', () => 
     await expect(testofilos.mainTitle).toContainText('Filozofia');
     await expect(testofilos.mainTitle).toContainText('Testowania');
     await expect(testofilos.mainSubtitle).toHaveText('Próba naukowego podejścia do umiejętności testowania oprogramowania.');
+    const subtitleLineCount = await testofilos.mainSubtitle.evaluate(el => {
+      const lineHeight = parseFloat(window.getComputedStyle(el).lineHeight);
+      return Math.round(el.clientHeight / lineHeight);
+    });
+    expect(subtitleLineCount).toBe(1);
 
     await expect(testofilos.plBtn).toHaveClass(/active/);
     await expect(testofilos.enBtn).not.toHaveClass(/active/);
