@@ -28,16 +28,6 @@ npm run report      # View HTML test report
 
 ---
 
-## Usage
-
-Open `index.html` in any browser:
-
-```bash
-open index.html
-```
-
----
-
 ## Changelog
 
 Detailed release history and notable changes can be found in [CHANGELOG.md](CHANGELOG.md), which adheres to the [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) format.

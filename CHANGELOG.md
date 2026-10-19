@@ -8,14 +8,29 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- Modern UI experiment (`#experiment-one`) with enhanced readability color palettes (Light Paper, Dark Slate, Warm Book Sepia) and floating theme switcher pill.
+- Dedicated "Contact" page view with top-row navigation link (`HOME | CONTACT`) in all three languages.
+- "HOME" navigation button in top row allowing instant return to the main landing view.
+- Part 1 & Part 2 publication tabs (`Filozofia testowania · Część pierwsza` / `Część druga`) placed directly above the article.
+- Sticky frozen header wrapper (`.frozen-header-wrapper`) pinning the language switcher, top navigation, title, subtitle, and publication tabs to the top of the viewport when scrolling.
+- Visual regression testing baseline with cross-platform snapshots for macOS (`-darwin.png`) and Linux CI (`-linux.png`).
+- GitHub Actions CI/CD test results UI dashboard embedded directly into the workflow summary (`$GITHUB_STEP_SUMMARY`).
 - Ukrainian language version (UA) encompassing the complete essay, laws of testing, footnotes, and sticky Table of Contents.
 - Language switcher support for Ukrainian (`UA`) with dynamic `lang="uk"` root attribute updating for proper hyphenation, document title, and subtitle localization.
 - System sans-serif and monospace fallback fonts to ensure clean typography rendering across Cyrillic characters.
-- Additional ProtonMail contact email (`zygler.pawel@protonmail.com`) placed under the Gmail address in all language contact sections.
 
 ### Changed
+- Styled page title (`Filozofia Testowania`) and subtitle (`Próba naukowego podejścia do umiejętności testowania oprogramowania.`) to fit on a single line on desktop/tablet viewports.
+- Dynamically positioned sticky sidebar (Table of Contents) below the frozen header (`top: calc(var(--frozen-header-h) + 1.5rem)`) with `max-height` and internal scroll, preventing it from clipping or sliding under the header.
+- Added `scroll-margin-top` for all sections and anchor targets to ensure target content lands cleanly below the frozen header when navigating via TOC links.
+- Stabilized scrollbar layout using `scrollbar-gutter: stable;` on `html` to eliminate layout shift when toggling between tabs.
+- Updated copyright notice year in footer to 2026 across all language versions.
 - Updated `README.md` to reflect multilingual support (PL / EN / UA).
 - Removed the term "prawa" / "laws" / "закони" across all language versions (Polish, English, Ukrainian), replacing them with "Ustalenia", "Findings", and "Положення" respectively.
+
+### Removed
+- Removed 'Usage' section from `README.md` in favor of direct GitHub Pages deployment.
+- Removed secondary ProtonMail contact address, retaining exclusively `pawel.zygler@gmail.com`.
 
 ## [1.1.0] - 2026-08-06
 
