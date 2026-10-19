@@ -4,6 +4,8 @@ Philosophy of testing / Filozofia testowania / Філософія тестува
 
 **Live Site:** [filoqa](https://pawel-zygler.github.io/testofilos/)
 
+![Filozofia Testowania](docs/assets/filt1.png)
+
 ---
 
 ## Layout & Design
