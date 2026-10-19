@@ -10,8 +10,14 @@ module.exports = defineConfig({
     ['list'],
     ['html', { open: 'never', outputFolder: 'playwright-report' }]
   ],
+  webServer: {
+    command: 'python3 -m http.server 8080',
+    port: 8080,
+    reuseExistingServer: true,
+    timeout: 10000,
+  },
   use: {
-    baseURL: 'https://pawel-zygler.github.io/testofilos/',
+    baseURL: process.env.BASE_URL || 'http://localhost:8080',
     trace: 'on-first-retry',
     screenshot: 'only-on-failure',
     video: 'retain-on-failure',

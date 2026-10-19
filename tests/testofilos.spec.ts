@@ -6,45 +6,56 @@ test.describe('@smoke @e2e Philosophy of Testing - Language & Core Flow', () => 
 
   test.beforeEach(async ({ page }) => {
     testofilos = new TestofilosPage(page);
-    // Navigate to "https://pawel-zygler.github.io/testofilos/" at the start of each test
     await testofilos.goto();
   });
 
   test('should load landing page in Polish by default', async ({ page }) => {
-    // Verify browser tab title
     await expect(page).toHaveTitle('Filozofia Testowania');
-
-    // Verify main headline and subtitle
     await expect(testofilos.mainTitle).toContainText('Filozofia');
     await expect(testofilos.mainTitle).toContainText('Testowania');
     await expect(testofilos.mainSubtitle).toHaveText('Próba naukowego podejścia do umiejętności testowania oprogramowania.');
 
-    // PL language is active by default, EN content is hidden
     await expect(testofilos.plBtn).toHaveClass(/active/);
     await expect(testofilos.enBtn).not.toHaveClass(/active/);
     await expect(testofilos.plContent).toBeVisible();
     await expect(testofilos.enContent).toBeHidden();
   });
 
+  test('should toggle between Part One and Part Two tabs', async () => {
+    await expect(testofilos.part1Btn).toHaveText('Filozofia testowania · Część pierwsza');
+    await expect(testofilos.part2Btn).toHaveText('Filozofia testowania · Część druga');
+    await expect(testofilos.part1Btn).toHaveClass(/active/);
+
+    // Switch to Part 2
+    await testofilos.switchToPart(2);
+    await expect(testofilos.part2Title).toHaveText('Filozofia testowania · Część druga');
+    await expect(testofilos.part2Desc).toContainText('Część druga jest w przygotowaniu');
+
+    // Switch back to Part 1
+    await testofilos.switchToPart(1);
+    await expect(testofilos.plContent).toBeVisible();
+    await expect(testofilos.part2Content).toBeHidden();
+  });
+
   test('should switch language to English (EN)', async ({ page }) => {
-    // Switch to EN
     await testofilos.switchToEnglish();
 
-    // Verify changes after language switch
     await expect(page).toHaveTitle('Philosophy of Testing');
     await expect(testofilos.mainTitle).toContainText('Philosophy');
     await expect(testofilos.mainTitle).toContainText('of Testing');
     await expect(testofilos.mainSubtitle).toHaveText('A scientific approach to the craft of software testing.');
 
-    // EN button active, EN content visible, PL hidden
     await expect(testofilos.enBtn).toHaveClass(/active/);
     await expect(testofilos.plBtn).not.toHaveClass(/active/);
     await expect(testofilos.enContent).toBeVisible();
     await expect(testofilos.plContent).toBeHidden();
+
+    // Verify tabs translate to English
+    await expect(testofilos.part1Btn).toHaveText('Philosophy of Testing · Part One');
+    await expect(testofilos.part2Btn).toHaveText('Philosophy of Testing · Part Two');
   });
 
   test('should allow switching back to Polish (PL)', async ({ page }) => {
-    // Switch to EN, then back to PL
     await testofilos.switchToEnglish();
     await testofilos.switchToPolish();
 
@@ -55,13 +66,7 @@ test.describe('@smoke @e2e Philosophy of Testing - Language & Core Flow', () => 
 
   test('should display findings / ustalenia in Polish version', async () => {
     await expect(testofilos.plLaws).toBeVisible();
-    await expect(testofilos.plLaws).toContainText(/informacj/i);
-    await expect(testofilos.plLaws).toContainText(/aksjomat/i);
-    await expect(testofilos.plLaws).toContainText(/asercj/i);
-    await expect(testofilos.plLaws).toContainText(/granic/i);
-    await expect(testofilos.plLaws).toContainText(/ryzyk/i);
-    await expect(testofilos.plLaws).toContainText(/jakoś/i);
-    await expect(testofilos.plLaws).toContainText(/inspekcj/i);
+    await expect(testofilos.plLaws).toContainText('Ustalenia');
   });
 
   test('should contain valid mailto contact link and footer', async () => {

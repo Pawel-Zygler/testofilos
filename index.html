@@ -405,6 +405,56 @@
         .site-header { padding: 3rem 0 2rem; }
         .site-title { font-size: 1.75rem; }
       }
+
+      /* =================== PARTS TABS =================== */
+      .parts-nav {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 2rem;
+        border-bottom: 1px solid var(--line);
+        margin: 0 0 2.5rem 0;
+        padding-bottom: 0.85rem;
+      }
+
+      .part-tab {
+        background: none;
+        border: none;
+        font-family: 'DM Mono', monospace;
+        font-size: 0.75rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--text-dim);
+        cursor: pointer;
+        padding: 0.25rem 0;
+        position: relative;
+        transition: color 0.15s ease;
+      }
+
+      .part-tab:hover {
+        color: var(--text);
+      }
+
+      .part-tab.active {
+        color: var(--text);
+        font-weight: 500;
+      }
+
+      .part-tab.active::after {
+        content: '';
+        position: absolute;
+        bottom: -0.85rem;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: var(--text);
+      }
+
+      .part2-placeholder {
+        font-style: italic;
+        color: var(--text-secondary);
+        margin-top: 1.5rem;
+        font-size: 1.05rem;
+      }
     </style>
   </head>
   <body>
@@ -421,6 +471,13 @@
         <h1 class="site-title" id="main-title" data-testid="main-title">Filozofia<br/>Testowania</h1>
         <p class="site-subtitle" id="main-subtitle" data-testid="main-subtitle">Próba naukowego podejścia do umiejętności testowania oprogramowania.</p>
       </header>
+
+      <!-- ===== PARTS TABS NAVIGATION ===== -->
+      <nav class="parts-nav" data-testid="parts-nav" aria-label="Części artykułu">
+        <button id="part1-btn" class="part-tab active" data-testid="tab-part-1">Filozofia testowania · Część pierwsza</button>
+        <button id="part2-btn" class="part-tab" data-testid="tab-part-2">Filozofia testowania · Część druga</button>
+      </nav>
+
 
       <!-- ===== POLISH ===== -->
       <div id="pl-content" class="content-grid" data-testid="content-pl">
@@ -459,7 +516,6 @@
           </section>
 
           <section id="pl-why" data-testid="section-pl-why">
-            <h2>Filozofia testowania · Część pierwsza</h2>
             <h3>Dlaczego istnieje potrzeba zatrudniania testerów?</h3>
             <p>
               Co jest przedmiotem testowania w naszej branży? Jest nim oprogramowanie.
@@ -830,7 +886,6 @@
           </section>
 
           <section id="en-why" data-testid="section-en-why">
-            <h2>Philosophy of Testing · Part One</h2>
             <h3>Why Is There a Need to Hire Testers?</h3>
             <p>
               What is the subject of testing in our industry? It is software. What is
@@ -1064,7 +1119,6 @@
           </section>
 
           <section id="ua-why" data-testid="section-ua-why">
-            <h2>Філософія тестування · Частина перша</h2>
             <h3>Чому існує потреба наймати тестувальників?</h3>
             <p>
               Що є предметом тестування в нашій галузі? Ним є програмне забезпечення.
@@ -1405,6 +1459,18 @@
         </aside>
       </div><!-- end ua-content -->
 
+      <!-- ===== PART TWO (CZĘŚĆ DRUGA) ===== -->
+      <div id="part2-content" class="content-grid hidden" data-testid="content-part2">
+        <article>
+          <section id="part2-intro" data-testid="section-part2-intro">
+            <h2 id="part2-title">Filozofia testowania · Część druga</h2>
+            <p id="part2-desc" class="part2-placeholder">
+              Część druga jest w przygotowaniu.
+            </p>
+          </section>
+        </article>
+      </div>
+
       <footer class="site-footer" data-testid="site-footer">
         <p id="footer-text" data-testid="footer-text">&copy; 2025 Filozofia Testowania</p>
       </footer>
@@ -1412,6 +1478,9 @@
     </div><!-- end page -->
 
     <script>
+      let currentPart = 1;
+      let currentLang = 'pl';
+
       const plBtn = document.getElementById('pl-btn');
       const enBtn = document.getElementById('en-btn');
       const uaBtn = document.getElementById('ua-btn');
@@ -1422,6 +1491,28 @@
       const mainSubtitle = document.getElementById('main-subtitle');
       const docTitle = document.querySelector('title');
       const footerText = document.getElementById('footer-text');
+
+      const part1Btn = document.getElementById('part1-btn');
+      const part2Btn = document.getElementById('part2-btn');
+      const part2Content = document.getElementById('part2-content');
+      const part2Title = document.getElementById('part2-title');
+      const part2Desc = document.getElementById('part2-desc');
+
+      const part1Titles = {
+        pl: 'Filozofia testowania · Część pierwsza',
+        en: 'Philosophy of Testing · Part One',
+        uk: 'Філософія тестування · Частина перша'
+      };
+      const part2Titles = {
+        pl: 'Filozofia testowania · Część druga',
+        en: 'Philosophy of Testing · Part Two',
+        uk: 'Філософія тестування · Частина друга'
+      };
+      const part2Descriptions = {
+        pl: 'Część druga jest w przygotowaniu.',
+        en: 'Part Two is in preparation.',
+        uk: 'Частина друга в процесі підготовки.'
+      };
 
       const titles = {
         pl: 'Filozofia<br/>Testowania',
@@ -1444,13 +1535,39 @@
         uk: '&copy; 2025 Філософія тестування'
       };
 
+      function setPart(part) {
+        currentPart = part;
+        if (part === 1) {
+          part1Btn.classList.add('active');
+          part2Btn.classList.remove('active');
+          part2Content.classList.add('hidden');
+          setLanguage(currentLang);
+        } else {
+          part2Btn.classList.add('active');
+          part1Btn.classList.remove('active');
+          plContent.classList.add('hidden');
+          enContent.classList.add('hidden');
+          uaContent.classList.add('hidden');
+          part2Content.classList.remove('hidden');
+        }
+      }
+
       function setLanguage(lang) {
         const normalized = (lang === 'ua' || lang === 'uk') ? 'uk' : (lang === 'en' ? 'en' : 'pl');
+        currentLang = normalized;
         document.documentElement.lang = normalized;
 
-        plContent.classList.toggle('hidden', normalized !== 'pl');
-        enContent.classList.toggle('hidden', normalized !== 'en');
-        uaContent.classList.toggle('hidden', normalized !== 'uk');
+        if (currentPart === 1) {
+          plContent.classList.toggle('hidden', normalized !== 'pl');
+          enContent.classList.toggle('hidden', normalized !== 'en');
+          uaContent.classList.toggle('hidden', normalized !== 'uk');
+          part2Content.classList.add('hidden');
+        } else {
+          plContent.classList.add('hidden');
+          enContent.classList.add('hidden');
+          uaContent.classList.add('hidden');
+          part2Content.classList.remove('hidden');
+        }
 
         plBtn.classList.toggle('active', normalized === 'pl');
         enBtn.classList.toggle('active', normalized === 'en');
@@ -1462,11 +1579,19 @@
         if (footerText) {
           footerText.innerHTML = footerTexts[normalized];
         }
+
+        part1Btn.textContent = part1Titles[normalized];
+        part2Btn.textContent = part2Titles[normalized];
+        if (part2Title) part2Title.textContent = part2Titles[normalized];
+        if (part2Desc) part2Desc.textContent = part2Descriptions[normalized];
       }
 
       plBtn.addEventListener('click', () => setLanguage('pl'));
       enBtn.addEventListener('click', () => setLanguage('en'));
       uaBtn.addEventListener('click', () => setLanguage('ua'));
+
+      part1Btn.addEventListener('click', () => setPart(1));
+      part2Btn.addEventListener('click', () => setPart(2));
 
       const urlParams = new URLSearchParams(window.location.search);
       const urlLang = urlParams.get('lang');
