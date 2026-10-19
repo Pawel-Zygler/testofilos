@@ -21,7 +21,7 @@ function generateSummary() {
   const overallBadge = isSuccess ? '🟢 **ALL PASSED**' : '🔴 **FAILED**';
 
   let markdown = [];
-  markdown.push('## 🧪 Test Results & Quality Gates');
+  markdown.push('## Test Results & Quality Gates');
   markdown.push('');
   markdown.push('| Status | Total | Passed | Failed | Flaky | Skipped | Duration |');
   markdown.push('| :---: | :---: | :---: | :---: | :---: | :---: | :---: |');
