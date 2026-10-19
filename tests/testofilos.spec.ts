@@ -27,20 +27,26 @@ test.describe('@smoke @e2e Philosophy of Testing - Language & Core Flow', () => 
     expect(position).toBe('sticky');
   });
 
-  test('should display Contact page button in the top row and navigate to Contact', async () => {
+  test('should display HOME | CONTACT navigation in the top row and navigate correctly', async () => {
+    await expect(testofilos.homeNavBtn).toBeVisible();
+    await expect(testofilos.homeNavBtn).toHaveText('HOME');
     await expect(testofilos.contactNavBtn).toBeVisible();
-    await expect(testofilos.contactNavBtn).toHaveText('Kontakt');
+    await expect(testofilos.contactNavBtn).toHaveText('CONTACT');
+    await expect(testofilos.homeNavBtn).toHaveClass(/active/);
 
-    // Click Contact button to open Contact page
+    // Switch to Contact
     await testofilos.switchToContact();
     await expect(testofilos.contactContent).toBeVisible();
     await expect(testofilos.plContent).toBeHidden();
-    await expect(testofilos.contactEmail.first()).toBeVisible();
+    await expect(testofilos.contactNavBtn).toHaveClass(/active/);
+    await expect(testofilos.homeNavBtn).not.toHaveClass(/active/);
 
-    // Switch back to Part 1
-    await testofilos.switchToPart(1);
-    await expect(testofilos.contactContent).toBeHidden();
+    // Click HOME to return to title page / main landing
+    await testofilos.switchToHome();
     await expect(testofilos.plContent).toBeVisible();
+    await expect(testofilos.contactContent).toBeHidden();
+    await expect(testofilos.homeNavBtn).toHaveClass(/active/);
+    await expect(testofilos.contactNavBtn).not.toHaveClass(/active/);
   });
 
   test('should display exactly two publication tabs', async () => {
@@ -84,8 +90,8 @@ test.describe('@smoke @e2e Philosophy of Testing - Language & Core Flow', () => 
     await expect(testofilos.part1Btn).toHaveText('Philosophy of Testing · Part One');
     await expect(testofilos.part2Btn).toHaveText('Philosophy of Testing · Part Two');
 
-    // Verify Contact button translates to English
-    await expect(testofilos.contactNavBtn).toHaveText('Contact');
+    // Verify Contact button text
+    await expect(testofilos.contactNavBtn).toHaveText('CONTACT');
   });
 
   test('should allow switching back to Polish (PL)', async ({ page }) => {

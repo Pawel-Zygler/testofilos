@@ -9,6 +9,7 @@ export class TestofilosPage {
   readonly plBtn: Locator;
   readonly enBtn: Locator;
   readonly uaBtn: Locator;
+  readonly homeNavBtn: Locator;
   readonly contactNavBtn: Locator;
   readonly partsNav: Locator;
   readonly partTabs: Locator;
@@ -43,6 +44,7 @@ export class TestofilosPage {
     this.plBtn = page.locator('[data-testid="lang-switch-pl"], #pl-btn');
     this.enBtn = page.locator('[data-testid="lang-switch-en"], #en-btn');
     this.uaBtn = page.locator('[data-testid="lang-switch-ua"], #ua-btn');
+    this.homeNavBtn = page.locator('[data-testid="nav-home-btn"], #home-nav-btn');
     this.contactNavBtn = page.locator('[data-testid="nav-contact-btn"], #contact-nav-btn');
 
     // Parts tabs
@@ -115,6 +117,12 @@ export class TestofilosPage {
     await this.contactNavBtn.click();
     await expect(this.contactNavBtn).toHaveClass(/active/);
     await expect(this.contactContent).toBeVisible();
+  }
+
+  async switchToHome() {
+    await this.homeNavBtn.click();
+    await expect(this.homeNavBtn).toHaveClass(/active/);
+    await expect(this.plContent).toBeVisible();
   }
 
   async getTocItems(lang: 'pl' | 'en' | 'ua'): Promise<string[]> {

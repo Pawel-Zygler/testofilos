@@ -226,7 +226,13 @@
 
       .lang-sep { color: var(--line); font-size: 1rem; }
 
-      .nav-contact-btn {
+      .top-nav {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+      }
+
+      .nav-btn {
         background: none;
         border: none;
         font-family: 'DM Mono', monospace;
@@ -239,13 +245,19 @@
         transition: color 0.2s;
       }
 
-      .nav-contact-btn:hover {
+      .nav-btn:hover {
         color: var(--text-secondary);
       }
 
-      .nav-contact-btn.active {
+      .nav-btn.active {
         color: var(--text);
         font-weight: 500;
+      }
+
+      .nav-sep {
+        color: var(--line);
+        font-size: 0.75rem;
+        user-select: none;
       }
 
       .site-title {
@@ -507,7 +519,11 @@
               <span class="lang-sep">/</span>
               <button id="ua-btn" class="lang-btn" data-testid="lang-switch-ua">UA</button>
             </div>
-            <button id="contact-nav-btn" class="nav-contact-btn" data-testid="nav-contact-btn">Kontakt</button>
+            <div class="top-nav" data-testid="top-nav">
+              <button id="home-nav-btn" class="nav-btn active" data-testid="nav-home-btn">HOME</button>
+              <span class="nav-sep">|</span>
+              <button id="contact-nav-btn" class="nav-btn" data-testid="nav-contact-btn">CONTACT</button>
+            </div>
           </div>
           <h1 class="site-title" id="main-title" data-testid="main-title">Filozofia Testowania</h1>
           <p class="site-subtitle" id="main-subtitle" data-testid="main-subtitle">Próba naukowego podejścia do umiejętności testowania oprogramowania.</p>
@@ -1532,6 +1548,7 @@
       const plBtn = document.getElementById('pl-btn');
       const enBtn = document.getElementById('en-btn');
       const uaBtn = document.getElementById('ua-btn');
+      const homeNavBtn = document.getElementById('home-nav-btn');
       const contactNavBtn = document.getElementById('contact-nav-btn');
 
       const plContent = document.getElementById('pl-content');
@@ -1570,9 +1587,9 @@
       };
 
       const contactNavTitles = {
-        pl: 'Kontakt',
-        en: 'Contact',
-        uk: 'Контакти'
+        pl: 'CONTACT',
+        en: 'CONTACT',
+        uk: 'CONTACT'
       };
 
       const titles = {
@@ -1599,6 +1616,7 @@
       function updateViews() {
         if (currentView === 'contact') {
           contactNavBtn.classList.add('active');
+          homeNavBtn.classList.remove('active');
           part1Btn.classList.remove('active');
           part2Btn.classList.remove('active');
 
@@ -1613,6 +1631,7 @@
           uaContact.classList.toggle('hidden', currentLang !== 'uk');
         } else if (currentView === 'part2') {
           contactNavBtn.classList.remove('active');
+          homeNavBtn.classList.remove('active');
           part1Btn.classList.remove('active');
           part2Btn.classList.add('active');
 
@@ -1622,8 +1641,9 @@
           contactContent.classList.add('hidden');
           part2Content.classList.remove('hidden');
         } else {
-          // part1
+          // part1 (Title page / Home)
           contactNavBtn.classList.remove('active');
+          homeNavBtn.classList.add('active');
           part1Btn.classList.add('active');
           part2Btn.classList.remove('active');
 
@@ -1675,9 +1695,17 @@
       enBtn.addEventListener('click', () => setLanguage('en'));
       uaBtn.addEventListener('click', () => setLanguage('ua'));
 
+      function goHome() {
+        setPart(1);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+
       part1Btn.addEventListener('click', () => setPart(1));
       part2Btn.addEventListener('click', () => setPart(2));
+      homeNavBtn.addEventListener('click', () => goHome());
       contactNavBtn.addEventListener('click', () => showContact());
+      mainTitle.style.cursor = 'pointer';
+      mainTitle.addEventListener('click', () => goHome());
 
       document.querySelectorAll('.toc-contact-link').forEach(link => {
         link.addEventListener('click', (e) => {
