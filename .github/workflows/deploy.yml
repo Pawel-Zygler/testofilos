@@ -38,16 +38,14 @@ jobs:
       - name: Install Playwright Chromium
         run: npx playwright install chromium --with-deps
 
-      - name: Run Smoke Tests (DEPLOYMENT BLOCKER)
-        run: npm run test:smoke
+      - name: Run Playwright Tests & Quality Gates
+        run: npm test
 
-      - name: Run Accessibility Tests (DEPLOYMENT BLOCKER)
-        run: npm run test:a11y
+      - name: Publish Test Results UI to GitHub Summary
+        if: always()
+        run: node scripts/generate-summary.js
 
-      - name: Run Full Regression
-        run: npm run test:regression
-
-      - name: Upload Test Report
+      - name: Upload Test Report Artifact
         uses: actions/upload-artifact@v4
         if: always()
         with:

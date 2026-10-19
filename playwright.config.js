@@ -8,7 +8,9 @@ module.exports = defineConfig({
   workers: process.env.CI ? 1 : undefined,
   reporter: [
     ['list'],
-    ['html', { open: 'never', outputFolder: 'playwright-report' }]
+    ['html', { open: 'never', outputFolder: 'playwright-report' }],
+    ['json', { outputFile: 'test-results/results.json' }],
+    ...(process.env.CI ? [['github']] : [])
   ],
   webServer: {
     command: 'python3 -m http.server 8080',
