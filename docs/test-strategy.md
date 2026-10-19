@@ -20,6 +20,16 @@ Quality strategy and testing architecture for [Filozofia Testowania](https://paw
  /         Static Analysis (tsc, lint-staged)     \
 ```
 
+## Design for Testability
+
+Contract-based testing using `data-testid` standard:
+- **Contract Definition**: Key interactive elements define dedicated test attributes:
+  ```html
+  <button data-testid="lang-switch-pl">PL</button>
+  <button data-testid="lang-switch-en">EN</button>
+  ```
+- **Dual Support in POM**: `pages/TestofilosPage.ts` supports both `data-testid` selectors and fallback DOM IDs (`#pl-btn`, `#en-btn`), making tests resilient to CSS refactoring and markup changes.
+
 ## Environments
 
 - **Production**: `https://pawel-zygler.github.io/testofilos/`
