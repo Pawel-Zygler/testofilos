@@ -1,6 +1,6 @@
 # Test Plan
 
-Master test plan for [Filozofia Testowania](https://pawel-zygler.github.io/testofilos/).
+Master test plan for [Filozofia Testowania](https://testofilos.pages.dev/).
 
 ## Core Scope
 

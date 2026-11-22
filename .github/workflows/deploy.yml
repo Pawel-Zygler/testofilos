@@ -1,4 +1,4 @@
-name: Test & Deploy to GitHub Pages
+name: Test & Deploy to Cloudflare Pages
 
 on:
   push:
@@ -6,14 +6,13 @@ on:
   pull_request:
     branches: [ main ]
 
-concurrency:
-  group: "pages"
-  cancel-in-progress: false
-
 permissions:
   contents: read
-  pages: write
-  id-token: write
+
+env:
+  NODE_VERSION: 24
+  CLOUDFLARE_PROJECT: testofilos
+  PRODUCTION_URL: https://testofilos.pages.dev
 
 jobs:
   test:
@@ -21,12 +20,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
-          node-version: 20
+          node-version: ${{ env.NODE_VERSION }}
           cache: 'npm'
 
       - name: Install dependencies
@@ -38,6 +37,7 @@ jobs:
       - name: Install Playwright Chromium
         run: npx playwright install chromium --with-deps
 
+      # Builds _site/ and serves it with the same headers as Cloudflare Pages.
       - name: Run Playwright Tests & Quality Gates
         run: npm test
 
@@ -46,32 +46,132 @@ jobs:
         run: node scripts/generate-summary.js
 
       - name: Upload Test Report Artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         if: always()
         with:
           name: playwright-report
           path: playwright-report/
           retention-days: 14
 
+      - name: Upload built site
+        uses: actions/upload-artifact@v5
+        with:
+          name: site
+          path: _site/
+          include-hidden-files: true
+          retention-days: 7
+
   deploy:
-    name: Deploy to GitHub Pages
+    name: Deploy to Cloudflare Pages (${{ github.event_name == 'push' && 'production' || 'preview' }})
     needs: test
-    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    # Fork PRs have no access to secrets, so they are tested but not deployed.
+    if: github.event_name == 'push' || github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-latest
+    concurrency:
+      group: cloudflare-${{ github.ref }}
+      cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+    environment:
+      name: ${{ github.event_name == 'push' && 'cloudflare-production' || 'cloudflare-preview' }}
+      url: ${{ steps.target.outputs.url }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v5
+
+      - name: Download built site
+        uses: actions/download-artifact@v6
+        with:
+          name: site
+          path: _site/
+
+      # Creates the Pages project on the first run; fails harmlessly when it already exists.
+      - name: Ensure Cloudflare Pages project exists
+        continue-on-error: true
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          wranglerVersion: '4'
+          command: pages project create ${{ env.CLOUDFLARE_PROJECT }} --production-branch=main
+
+      - name: Deploy
+        id: deploy
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          wranglerVersion: '4'
+          command: pages deploy _site --project-name=${{ env.CLOUDFLARE_PROJECT }} --branch=${{ github.head_ref || github.ref_name }} --commit-hash=${{ github.event.pull_request.head.sha || github.sha }}
+
+      - name: Resolve URL to test
+        id: target
+        env:
+          DEPLOYMENT_URL: ${{ steps.deploy.outputs.deployment-url }}
+        run: |
+          if [ "${{ github.event_name }}" = "push" ]; then url="$PRODUCTION_URL"; else url="$DEPLOYMENT_URL"; fi
+          echo "url=$url" >> "$GITHUB_OUTPUT"
+          echo "### Deployed: $url" >> "$GITHUB_STEP_SUMMARY"
+
+      # A new Pages project (and each new preview subdomain) can take a few minutes
+      # before its TLS certificate is ready, so wait until the URL answers over HTTPS.
+      - name: Wait for the deployment to be reachable
+        env:
+          URL: ${{ steps.target.outputs.url }}
+        run: |
+          for i in $(seq 1 40); do
+            if curl -fsS -o /dev/null --max-time 10 "$URL/"; then echo "Reachable: $URL"; exit 0; fi
+            echo "Not reachable yet ($i/40), retrying in 15s..."; sleep 15
+          done
+          echo "::error::$URL did not become reachable within 10 minutes"; exit 1
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v5
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Playwright Chromium
+        run: npx playwright install chromium --with-deps
+
+      - name: Smoke test the deployed site
+        env:
+          BASE_URL: ${{ steps.target.outputs.url }}
+        run: npm run test:smoke
+
+  redirect-github-pages:
+    name: Redirect old GitHub Pages address
+    needs: deploy
+    if: github.event_name == 'push'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    concurrency:
+      group: pages
+      cancel-in-progress: false
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
+
+      - name: Prepare redirect site
+        run: |
+          mkdir -p _redirect
+          cp redirect/index.html _redirect/index.html
+          cp redirect/index.html _redirect/404.html
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v4
         with:
-          path: '.'
+          path: _redirect
 
       - name: Deploy to GitHub Pages
         id: deployment
