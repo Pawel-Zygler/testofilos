@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `@deploy` test suite (`tests/deployment.spec.ts`): security headers, no repository files published, custom 404 page, self-hosted fonts without third-party requests or CSP violations, page metadata.
 - Custom 404 page in PL / EN / UA.
 - Favicon, meta description, canonical URL, Open Graph and Twitter card metadata with a social preview image.
+- Logo (`true ≠ false`, `public/logo.svg`) to the left of the page title and subtitle; on screens up to 680 px it is smaller and sits next to the title.
 - Redirect from the old GitHub Pages address to the new site.
 - Modern UI experiment (`#experiment-one`) with enhanced readability color palettes (Light Paper, Dark Slate, Warm Book Sepia) and floating theme switcher pill.
 - Dedicated "Contact" page view with top-row navigation link (`HOME | CONTACT`) in all three languages.
@@ -38,6 +39,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Updated copyright notice year in footer to 2026 across all language versions.
 - Updated `README.md` to reflect multilingual support (PL / EN / UA).
 - Removed the term "prawa" / "laws" / "закони" across all language versions (Polish, English, Ukrainian), replacing them with "Ustalenia", "Findings", and "Положення" respectively.
+- The favicon shows the `≠` sign from the logo instead of the `FT` monogram, and the social preview image (`og-image.png`) shows the header with the logo.
 
 ### Removed
 - Removed 'Usage' section from `README.md` in favor of direct GitHub Pages deployment.
