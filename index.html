@@ -27,7 +27,7 @@
         --bg: #fafafa;
         --text: #111;
         --text-secondary: #555;
-        --text-dim: #999;
+        --text-dim: #707070;
         --accent: #111;
         --line: #e5e5e5;
         --highlight: #f0f0f0;
@@ -161,8 +161,8 @@
       .laws-list li {
         font-size: 0.9rem;
         color: var(--text-secondary);
-        line-height: 1.75;
-        margin-bottom: 1.25rem;
+        line-height: 1.7;
+        margin-bottom: 0.9rem;
         padding-left: 2rem;
         position: relative;
         counter-increment: law-counter;
@@ -210,7 +210,7 @@
         top: 0;
         z-index: 100;
         background: var(--bg);
-        padding-top: 2rem;
+        padding-top: 1.25rem;
       }
 
       .site-header {
@@ -294,6 +294,7 @@
       }
 
       .site-subtitle {
+        text-align: left;
         font-size: 0.9rem;
         color: var(--text-secondary);
         font-weight: 400;
@@ -307,10 +308,10 @@
       }
 
       /* =================== CONTENT =================== */
-      article { padding-bottom: 6rem; }
+      article { padding-bottom: 3rem; }
 
       section {
-        margin-bottom: 3.5rem;
+        margin-bottom: 2.5rem;
         scroll-margin-top: calc(var(--frozen-header-h, 235px) + 1.5rem);
       }
 
@@ -335,8 +336,8 @@
         letter-spacing: 0.1em;
         text-transform: uppercase;
         color: var(--text-dim);
-        margin-bottom: 1.75rem;
-        padding-bottom: 0.75rem;
+        margin-bottom: 1.25rem;
+        padding-bottom: 0.6rem;
         border-bottom: 1px solid var(--line);
       }
 
@@ -344,15 +345,15 @@
         font-size: 1.15rem;
         font-weight: 400;
         color: var(--text);
-        margin-bottom: 1.25rem;
+        margin-bottom: 0.75rem;
         letter-spacing: -0.01em;
       }
 
       p {
         font-size: 0.93rem;
-        line-height: 1.85;
+        line-height: 1.7;
         color: var(--text-secondary);
-        margin-bottom: 1.25rem;
+        margin-bottom: 1rem;
         text-align: justify;
         hyphens: auto;
         -webkit-hyphens: auto;
@@ -364,10 +365,10 @@
       blockquote {
         border-left: 2px solid var(--text-dim);
         padding: 0 0 0 1.25rem;
-        margin: 1.75rem 0;
+        margin: 1.25rem 0;
         color: var(--text-secondary);
         font-size: 0.9rem;
-        line-height: 1.8;
+        line-height: 1.7;
         font-style: italic;
         text-align: justify;
         hyphens: auto;
@@ -377,8 +378,8 @@
       /* Aside / certainty note */
       .note {
         background: var(--highlight);
-        padding: 1rem 1.25rem;
-        margin: 1.75rem 0;
+        padding: 0.85rem 1.1rem;
+        margin: 1.25rem 0;
         border-radius: 2px;
       }
 
@@ -387,7 +388,7 @@
         font-size: 0.62rem;
         letter-spacing: 0.12em;
         text-transform: uppercase;
-        color: var(--text-dim);
+        color: var(--text-secondary);
         display: block;
         margin-bottom: 0.5rem;
       }
@@ -442,7 +443,7 @@
       hr {
         border: none;
         border-top: 1px solid var(--line);
-        margin: 3rem 0;
+        margin: 2rem 0;
       }
 
       /* Footnotes */
@@ -486,7 +487,6 @@
       .hidden { display: none !important; }
 
       @media (max-width: 480px) {
-        .site-header { padding: 3rem 0 2rem; }
         .site-title { font-size: 1.75rem; }
       }
 
@@ -496,7 +496,7 @@
         flex-wrap: wrap;
         gap: 2rem;
         border-bottom: 1px solid var(--line);
-        margin: 0 0 2.5rem 0;
+        margin: 0 0 1.5rem 0;
         padding-bottom: 0.85rem;
       }
 
@@ -686,6 +686,76 @@
       .exp-exit:hover {
         color: var(--text);
       }
+
+      /* =================== TOC TOGGLE (collapsible on mobile) =================== */
+      .toc-details > summary {
+        list-style: none;
+        cursor: default;
+      }
+      .toc-details > summary::-webkit-details-marker { display: none; }
+
+      /* =================== BACK TO TOP =================== */
+      .to-top {
+        position: fixed;
+        right: 1.5rem;
+        bottom: 1.5rem;
+        z-index: 90;
+        width: 2.25rem;
+        height: 2.25rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: var(--bg);
+        border: 1px solid var(--line);
+        border-radius: 2px;
+        color: var(--text-dim);
+        font-family: 'DM Mono', monospace;
+        font-size: 0.85rem;
+        cursor: pointer;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.2s, visibility 0.2s, color 0.2s, border-color 0.2s;
+      }
+      .to-top.visible { opacity: 1; visibility: visible; }
+      .to-top:hover { color: var(--text); border-color: var(--text-dim); }
+      html[data-theme="experiment-one"] .to-top { bottom: 4.5rem; }
+
+      @media (prefers-reduced-motion: reduce) {
+        html { scroll-behavior: auto; }
+      }
+
+      /* =================== MOBILE: LESS SCROLLING =================== */
+      @media (max-width: 860px) {
+        /* Header scrolls away with the page instead of covering ~40% of the screen */
+        .frozen-header-wrapper { position: static; }
+        section, [id] { scroll-margin-top: 1rem; }
+
+        /* Collapsed table of contents, so the article starts on the first screen */
+        .sidebar { margin-bottom: 0.5rem; padding-bottom: 0.75rem; }
+        .toc-details > summary {
+          cursor: pointer;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin-bottom: 0;
+          padding: 0.35rem 0;
+        }
+        .toc-details > summary::after { content: '+'; font-size: 0.85rem; }
+        .toc-details[open] > summary::after { content: '\2212'; }
+        .toc-details[open] > summary { margin-bottom: 0.75rem; }
+
+        .to-top { right: 1rem; bottom: 1rem; }
+
+        /* Left-aligned text: no word gaps ("rivers") on narrow columns */
+        p, blockquote, .note p, .laws-list li { text-align: left; }
+      }
+
+      @media (max-width: 600px) {
+        /* "Filozofia testowania" is already the page title: shorter tabs fit in one row */
+        .tab-prefix { display: none; }
+        .parts-nav { gap: 1.5rem; margin-bottom: 1.25rem; }
+        .content-grid { gap: 1rem; }
+      }
     </style>
   </head>
   <body>
@@ -714,8 +784,8 @@
 
         <!-- ===== PARTS TABS NAVIGATION (LAST FROZEN PART) ===== -->
         <nav class="parts-nav" data-testid="parts-nav" aria-label="Części artykułu">
-          <button id="part1-btn" class="part-tab active" data-testid="tab-part-1">Filozofia testowania · Część pierwsza</button>
-          <button id="part2-btn" class="part-tab" data-testid="tab-part-2">Filozofia testowania · Część druga</button>
+          <button id="part1-btn" class="part-tab active" data-testid="tab-part-1"><span class="tab-prefix">Filozofia testowania · </span>Część pierwsza</button>
+          <button id="part2-btn" class="part-tab" data-testid="tab-part-2"><span class="tab-prefix">Filozofia testowania · </span>Część druga</button>
         </nav>
       </div><!-- end frozen-header-wrapper -->
 
@@ -1066,7 +1136,8 @@
         <aside class="sidebar">
           <!-- TOC -->
           <nav class="toc" aria-label="Spis treści" data-testid="toc-pl">
-            <span class="toc-label">Spis treści</span>
+            <details class="toc-details" open>
+              <summary class="toc-label">Spis treści</summary>
             <ul class="toc-list">
               <li><a href="#pl-intro"><span class="toc-num">01</span>Czym jest filozofia?</a></li>
               <li><a href="#pl-why"><span class="toc-num">02</span>Potrzeba testerów</a></li>
@@ -1083,6 +1154,7 @@
               <li><a href="#pl-sources"><span class="toc-num">13</span>Źródła</a></li>
               <li><a href="#contact" class="toc-contact-link"><span class="toc-num">14</span>Kontakt</a></li>
             </ul>
+            </details>
           </nav>
         </aside>
       </div><!-- end pl-content -->
@@ -1282,7 +1354,8 @@
         <aside class="sidebar">
           <!-- TOC -->
           <nav class="toc" aria-label="Table of Contents" data-testid="toc-en">
-            <span class="toc-label">Table of Contents</span>
+            <details class="toc-details" open>
+              <summary class="toc-label">Table of Contents</summary>
             <ul class="toc-list">
               <li><a href="#en-intro"><span class="toc-num">01</span>What is Philosophy?</a></li>
               <li><a href="#en-why"><span class="toc-num">02</span>Need for Testers</a></li>
@@ -1299,6 +1372,7 @@
               <li><a href="#en-sources"><span class="toc-num">13</span>Sources</a></li>
               <li><a href="#contact" class="toc-contact-link"><span class="toc-num">14</span>Contact</a></li>
             </ul>
+            </details>
           </nav>
         </aside>
       </div><!-- end en-content -->
@@ -1649,7 +1723,8 @@
         <aside class="sidebar">
           <!-- TOC -->
           <nav class="toc" aria-label="Зміст" data-testid="toc-ua">
-            <span class="toc-label">Зміст</span>
+            <details class="toc-details" open>
+              <summary class="toc-label">Зміст</summary>
             <ul class="toc-list">
               <li><a href="#ua-intro"><span class="toc-num">01</span>Що таке філософія?</a></li>
               <li><a href="#ua-why"><span class="toc-num">02</span>Потреба в тестувальниках</a></li>
@@ -1666,6 +1741,7 @@
               <li><a href="#ua-sources"><span class="toc-num">13</span>Джерела</a></li>
               <li><a href="#contact" class="toc-contact-link"><span class="toc-num">14</span>Контакти</a></li>
             </ul>
+            </details>
           </nav>
         </aside>
       </div><!-- end ua-content -->
@@ -1719,6 +1795,8 @@
       </footer>
 
     </div><!-- end page -->
+
+    <button id="to-top-btn" class="to-top" type="button" aria-label="Powrót na górę" title="Powrót na górę" data-testid="to-top-btn">↑</button>
 
     <!-- ===== EXPERIMENT ONE FLOATING BAR ===== -->
     <div id="experiment-bar" class="experiment-bar hidden" data-testid="experiment-bar">
@@ -1858,6 +1936,17 @@
         updateViews();
       }
 
+      // Renders "Prefix · Part" with the prefix in a span that is hidden on narrow screens
+      function setTabLabel(btn, label) {
+        const i = label.indexOf(' · ');
+        btn.textContent = '';
+        if (i === -1) { btn.textContent = label; return; }
+        const prefix = document.createElement('span');
+        prefix.className = 'tab-prefix';
+        prefix.textContent = label.slice(0, i + 3);
+        btn.append(prefix, label.slice(i + 3));
+      }
+
       function setLanguage(lang) {
         const normalized = (lang === 'ua' || lang === 'uk') ? 'uk' : (lang === 'en' ? 'en' : 'pl');
         currentLang = normalized;
@@ -1876,11 +1965,17 @@
           footerText.innerHTML = footerTexts[normalized];
         }
 
-        part1Btn.textContent = part1Titles[normalized];
-        part2Btn.textContent = part2Titles[normalized];
+        setTabLabel(part1Btn, part1Titles[normalized]);
+        setTabLabel(part2Btn, part2Titles[normalized]);
         if (part2Title) part2Title.textContent = part2Titles[normalized];
         if (part2Desc) part2Desc.textContent = part2Descriptions[normalized];
         if (contactNavBtn) contactNavBtn.textContent = contactNavTitles[normalized];
+        const toTop = document.getElementById('to-top-btn');
+        if (toTop) {
+          const l = { pl: 'Powrót na górę', en: 'Back to top', uk: 'Повернутися нагору' }[normalized];
+          toTop.setAttribute('aria-label', l);
+          toTop.title = l;
+        }
       }
 
       plBtn.addEventListener('click', () => setLanguage('pl'));
@@ -1909,6 +2004,29 @@
       window.addEventListener('resize', updateFrozenHeaderHeight);
       window.addEventListener('load', updateFrozenHeaderHeight);
       updateFrozenHeaderHeight();
+
+      // Table of contents: open on desktop (sidebar), collapsed on mobile
+      const mobileQuery = window.matchMedia('(max-width: 860px)');
+      const tocDetails = document.querySelectorAll('.toc-details');
+      function syncToc() {
+        tocDetails.forEach(d => { d.open = !mobileQuery.matches; });
+      }
+      tocDetails.forEach(d => {
+        d.querySelector('summary').addEventListener('click', (e) => {
+          if (!mobileQuery.matches) e.preventDefault();
+        });
+      });
+      mobileQuery.addEventListener('change', () => { syncToc(); updateFrozenHeaderHeight(); });
+      syncToc();
+
+      // Back to top: appears after one screen of scrolling
+      const toTopBtn = document.getElementById('to-top-btn');
+      function updateToTop() {
+        toTopBtn.classList.toggle('visible', window.scrollY > window.innerHeight);
+      }
+      window.addEventListener('scroll', updateToTop, { passive: true });
+      toTopBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+      updateToTop();
 
       document.querySelectorAll('.toc-contact-link').forEach(link => {
         link.addEventListener('click', (e) => {
