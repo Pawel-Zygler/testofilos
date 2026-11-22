@@ -8,6 +8,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- Cloudflare Pages hosting at `https://testofilos.pages.dev/` with a preview deployment for every pull request; production and previews are smoke-tested after each deploy.
+- Build step (`npm run build`, `scripts/build.mjs`) that publishes only public files to `_site/` and generates the `_headers` file.
+- Local static server (`scripts/serve.mjs`) that applies `_headers` like Cloudflare Pages, so the test suite runs against the built site with production headers.
+- `@deploy` test suite (`tests/deployment.spec.ts`): security headers, no repository files published, custom 404 page, self-hosted fonts without third-party requests or CSP violations, page metadata.
+- Custom 404 page in PL / EN / UA.
+- Favicon, meta description, canonical URL, Open Graph and Twitter card metadata with a social preview image.
+- Redirect from the old GitHub Pages address to the new site.
 - Modern UI experiment (`#experiment-one`) with enhanced readability color palettes (Light Paper, Dark Slate, Warm Book Sepia) and floating theme switcher pill.
 - Dedicated "Contact" page view with top-row navigation link (`HOME | CONTACT`) in all three languages.
 - "HOME" navigation button in top row allowing instant return to the main landing view.
@@ -20,6 +27,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - System sans-serif and monospace fallback fonts to ensure clean typography rendering across Cyrillic characters.
 
 ### Changed
+- Moved hosting from GitHub Pages to Cloudflare Pages; the project name is `testofilos` everywhere (Cloudflare project, package name, URLs in docs).
+- DM Sans and DM Mono fonts are now self-hosted (`public/fonts/`) instead of loaded from Google Fonts.
+- CI uses Node.js 24 (Node 20 is end-of-life) and current major versions of the GitHub Actions; Playwright runs against the built `_site/` instead of the repository root.
+- CI permissions reduced to `contents: read` by default; GitHub Pages permissions and concurrency apply only to the redirect job.
 - Styled page title (`Filozofia Testowania`) and subtitle (`Próba naukowego podejścia do umiejętności testowania oprogramowania.`) to fit on a single line on desktop/tablet viewports.
 - Dynamically positioned sticky sidebar (Table of Contents) below the frozen header (`top: calc(var(--frozen-header-h) + 1.5rem)`) with `max-height` and internal scroll, preventing it from clipping or sliding under the header.
 - Added `scroll-margin-top` for all sections and anchor targets to ensure target content lands cleanly below the frozen header when navigating via TOC links.
@@ -31,6 +42,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Removed
 - Removed 'Usage' section from `README.md` in favor of direct GitHub Pages deployment.
 - Removed secondary ProtonMail contact address, retaining exclusively `pawel.zygler@gmail.com`.
+
+### Security
+- Deployments no longer publish the whole repository (`package.json`, tests, `.agents/`, docs); only `index.html` and `public/` are deployed.
+- Added Content-Security-Policy (with a hash of the inline script), `X-Frame-Options`, `X-Content-Type-Options`, `Referrer-Policy`, `Permissions-Policy`, `Cross-Origin-Opener-Policy` and HSTS headers.
+- Visitors' IP addresses are no longer sent to Google when the page loads (fonts are self-hosted).
 
 ## [1.1.0] - 2026-08-06
 

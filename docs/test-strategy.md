@@ -1,6 +1,6 @@
 # Test Strategy
 
-Quality strategy and testing architecture for [Filozofia Testowania](https://pawel-zygler.github.io/testofilos/).
+Quality strategy and testing architecture for [Filozofia Testowania](https://testofilos.pages.dev/).
 
 ## Core Principles
 
@@ -32,7 +32,9 @@ Contract-based testing using `data-testid` standard:
 
 ## Environments
 
-- **Production**: `https://pawel-zygler.github.io/testofilos/`
+- **Local / CI**: the built `_site/` served by `scripts/serve.mjs`, which applies the same `_headers` as Cloudflare Pages.
+- **Preview**: every pull request is deployed to a Cloudflare Pages preview URL and smoke-tested there (`npm run test:smoke` with `BASE_URL`).
+- **Production**: `https://testofilos.pages.dev/`, smoke-tested after every deploy from `main`.
 - **CI Runner**: Headless Ubuntu runner executing parallel Chromium instances.
 
 ## Quality Standards

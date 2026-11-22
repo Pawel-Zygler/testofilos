@@ -12,11 +12,13 @@ module.exports = defineConfig({
     ['json', { outputFile: 'test-results/results.json' }],
     ...(process.env.CI ? [['github']] : [])
   ],
-  webServer: {
-    command: 'python3 -m http.server 8080',
+  // Locally and in CI the tests run against the built _site/ served with the same
+  // headers as Cloudflare Pages. Set BASE_URL to test a deployed site instead.
+  webServer: process.env.BASE_URL ? undefined : {
+    command: 'node scripts/build.mjs && node scripts/serve.mjs',
     port: 8080,
-    reuseExistingServer: true,
-    timeout: 10000,
+    reuseExistingServer: !process.env.CI,
+    timeout: 20000,
   },
   use: {
     baseURL: process.env.BASE_URL || 'http://localhost:8080',

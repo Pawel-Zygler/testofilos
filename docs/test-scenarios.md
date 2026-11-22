@@ -1,6 +1,6 @@
 # Test Scenarios
 
-Test cases for [Filozofia Testowania](https://pawel-zygler.github.io/testofilos/).
+Test cases for [Filozofia Testowania](https://testofilos.pages.dev/).
 
 ## Summary
 
