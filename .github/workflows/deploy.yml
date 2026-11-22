@@ -111,6 +111,18 @@ jobs:
           echo "url=$url" >> "$GITHUB_OUTPUT"
           echo "### Deployed: $url" >> "$GITHUB_STEP_SUMMARY"
 
+      # A new Pages project (and each new preview subdomain) can take a few minutes
+      # before its TLS certificate is ready, so wait until the URL answers over HTTPS.
+      - name: Wait for the deployment to be reachable
+        env:
+          URL: ${{ steps.target.outputs.url }}
+        run: |
+          for i in $(seq 1 40); do
+            if curl -fsS -o /dev/null --max-time 10 "$URL/"; then echo "Reachable: $URL"; exit 0; fi
+            echo "Not reachable yet ($i/40), retrying in 15s..."; sleep 15
+          done
+          echo "::error::$URL did not become reachable within 10 minutes"; exit 1
+
       - name: Setup Node.js
         uses: actions/setup-node@v5
         with:
