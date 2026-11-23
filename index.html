@@ -219,6 +219,34 @@
         margin-bottom: 0;
       }
 
+      /* =================== LOGO =================== */
+      /* The logo (true ≠ false) sits left of the title and subtitle. On desktop it is
+         no taller than those two lines, so the header keeps its height. */
+      .brand {
+        display: grid;
+        grid-template-columns: auto minmax(0, 1fr);
+        column-gap: 1.5rem;
+        align-items: start;
+      }
+
+      .site-logo {
+        grid-row: 1 / span 2;
+        display: block;
+        width: 84px;
+        height: 84px;
+        margin-top: 6px;
+      }
+
+      html[data-theme="experiment-one"][data-mode="dark"] .site-logo { filter: invert(1); }
+
+      @media (max-width: 680px) {
+        /* Narrow screens: a smaller logo next to the title, the subtitle below it at full width */
+        .brand { column-gap: 1rem; align-items: center; }
+        .site-logo { grid-row: auto; width: 56px; height: 56px; margin-top: 0; }
+        .brand .site-title { margin-bottom: 0; }
+        .brand .site-subtitle { grid-column: 1 / -1; margin-top: 0.75rem; }
+      }
+
       .top-bar {
         display: flex;
         align-items: center;
@@ -708,8 +736,11 @@
               <button id="contact-nav-btn" class="nav-btn" data-testid="nav-contact-btn">CONTACT</button>
             </div>
           </div>
-          <h1 class="site-title" id="main-title" data-testid="main-title">Filozofia Testowania</h1>
-          <p class="site-subtitle" id="main-subtitle" data-testid="main-subtitle">Próba naukowego podejścia do umiejętności testowania oprogramowania.</p>
+          <div class="brand">
+            <img class="site-logo" src="logo.svg" width="84" height="84" alt="" data-testid="site-logo" />
+            <h1 class="site-title" id="main-title" data-testid="main-title">Filozofia Testowania</h1>
+            <p class="site-subtitle" id="main-subtitle" data-testid="main-subtitle">Próba naukowego podejścia do umiejętności testowania oprogramowania.</p>
+          </div>
         </header>
 
         <!-- ===== PARTS TABS NAVIGATION (LAST FROZEN PART) ===== -->

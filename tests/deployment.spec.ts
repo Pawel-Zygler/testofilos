@@ -56,7 +56,7 @@ test.describe('@smoke @deploy Philosophy of Testing - Deployment & Security Head
     await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href', 'https://testofilos.pages.dev/');
     await expect(page.locator('meta[property="og:image"]')).toHaveAttribute('content', 'https://testofilos.pages.dev/og-image.png');
 
-    for (const path of ['/favicon.svg', '/og-image.png']) {
+    for (const path of ['/favicon.svg', '/logo.svg', '/og-image.png']) {
       expect((await request.get(path)).status(), path).toBe(200);
     }
   });
