@@ -6,6 +6,8 @@ export class TestofilosPage {
   readonly topBar: Locator;
   readonly mainTitle: Locator;
   readonly mainSubtitle: Locator;
+  readonly siteLogo: Locator;
+  readonly favicon: Locator;
   readonly plBtn: Locator;
   readonly enBtn: Locator;
   readonly uaBtn: Locator;
@@ -41,6 +43,8 @@ export class TestofilosPage {
     this.topBar = page.locator('[data-testid="top-bar"], .top-bar');
     this.mainTitle = page.locator('[data-testid="main-title"], #main-title');
     this.mainSubtitle = page.locator('[data-testid="main-subtitle"], #main-subtitle');
+    this.siteLogo = page.locator('[data-testid="site-logo"], .site-logo');
+    this.favicon = page.locator('link[rel="icon"]');
     this.plBtn = page.locator('[data-testid="lang-switch-pl"], #pl-btn');
     this.enBtn = page.locator('[data-testid="lang-switch-en"], #en-btn');
     this.uaBtn = page.locator('[data-testid="lang-switch-ua"], #ua-btn');
