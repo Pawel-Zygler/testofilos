@@ -8,6 +8,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- Back-to-top button (`↑`) that appears after one screen of scrolling, localized in PL / EN / UA.
+- Collapsible table of contents on mobile (`<details>`), closed by default so the article starts on the first screen; always open in the desktop sidebar.
 - Cloudflare Pages hosting at `https://testofilos.pages.dev/` with a preview deployment for every pull request; production and previews are smoke-tested after each deploy.
 - Build step (`npm run build`, `scripts/build.mjs`) that publishes only public files to `_site/` and generates the `_headers` file.
 - Local static server (`scripts/serve.mjs`) that applies `_headers` like Cloudflare Pages, so the test suite runs against the built site with production headers.
@@ -27,7 +29,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Language switcher support for Ukrainian (`UA`) with dynamic `lang="uk"` root attribute updating for proper hyphenation, document title, and subtitle localization.
 - System sans-serif and monospace fallback fonts to ensure clean typography rendering across Cyrillic characters.
 
+### Fixed
+- Text contrast: `--text-dim` changed from `#999` (2.7:1) to `#707070` (4.7:1) and note labels use `--text-secondary`, so axe reports no `color-contrast` violations (37 before).
+- Page subtitle is no longer justified.
+
 ### Changed
+- Less scrolling: tighter vertical rhythm (paragraph line-height 1.85 → 1.7, smaller gaps between sections, headings, notes and the findings list). The article is about 13% shorter on desktop and the whole page about half as many screens on a phone.
+- On screens up to 860 px the header is no longer sticky (it covered 41% of a 390 px screen and 63% of a 320 px screen); text is left-aligned there to avoid word gaps.
+- Part tabs show only "Część pierwsza / Część druga" below 600 px so they fit in one row.
+- Desktop sticky header is 12 px lower.
 - Moved hosting from GitHub Pages to Cloudflare Pages; the project name is `testofilos` everywhere (Cloudflare project, package name, URLs in docs).
 - DM Sans and DM Mono fonts are now self-hosted (`public/fonts/`) instead of loaded from Google Fonts.
 - CI uses Node.js 24 (Node 20 is end-of-life) and current major versions of the GitHub Actions; Playwright runs against the built `_site/` instead of the repository root.
