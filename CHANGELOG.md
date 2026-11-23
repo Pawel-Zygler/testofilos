@@ -17,6 +17,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Custom 404 page in PL / EN / UA.
 - Favicon, meta description, canonical URL, Open Graph and Twitter card metadata with a social preview image.
 - Logo (`true ≠ false`, `public/logo.svg`) to the left of the page title and subtitle; on screens up to 680 px it is smaller and sits next to the title.
+- `@regression @visual` tests for the logo (`tests/logo.spec.ts`): position, size and a snapshot on the landing page (desktop and a 390 px phone), and the favicon rendered at browser-tab sizes (16 and 32 px).
 - Redirect from the old GitHub Pages address to the new site.
 - Modern UI experiment (`#experiment-one`) with enhanced readability color palettes (Light Paper, Dark Slate, Warm Book Sepia) and floating theme switcher pill.
 - Dedicated "Contact" page view with top-row navigation link (`HOME | CONTACT`) in all three languages.
