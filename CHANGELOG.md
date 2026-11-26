@@ -35,6 +35,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Page subtitle is no longer justified.
 
 ### Changed
+- EN "Inspection" law: "QA is proactive and preventive" now reads "QA is proactive and preventive as it has broader meaning than testing."
 - Less scrolling: tighter vertical rhythm (paragraph line-height 1.85 → 1.7, smaller gaps between sections, headings, notes and the findings list). The article is about 13% shorter on desktop and the whole page about half as many screens on a phone.
 - On screens up to 860 px the header is no longer sticky (it covered 41% of a 390 px screen and 63% of a 320 px screen); text is left-aligned there to avoid word gaps.
 - Part tabs show only "Część pierwsza / Część druga" below 600 px so they fit in one row.
